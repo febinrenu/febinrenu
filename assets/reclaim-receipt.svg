@@ -1,0 +1,38 @@
+<svg width="640" height="220" viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rrTitle rrDesc">
+  <title id="rrTitle">Reclaim — held-out evaluation results</title>
+  <desc id="rrDesc">A receipt-style card listing Reclaim's measured results: 3,042 held-out events evaluated, 1.42 times net recovery versus retrying every payment, 0.69 ROC-AUC, 574 automated tests, and status live with CI passing.</desc>
+  <defs>
+    <style>
+      .bg { fill: #0d1117; }
+      .border { fill: none; stroke: #30363d; stroke-width: 1; stroke-dasharray: 3 3; }
+      .label { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 13px; fill: #8b949e; }
+      .value { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 13px; fill: #e6edf3; text-anchor: end; }
+      .value-hi { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 13px; fill: #3fb950; text-anchor: end; font-weight: 700; }
+      .rule { stroke: #30363d; stroke-width: 1; }
+      .head { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 14px; fill: #e6edf3; font-weight: 700; }
+      .sub { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 11px; fill: #6e7681; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="1" y="1" width="638" height="218" rx="8"/>
+  <rect class="border" x="1" y="1" width="638" height="218" rx="8"/>
+
+  <text x="28" y="34" class="head">RECLAIM — held-out evaluation</text>
+  <text x="28" y="50" class="sub">measured on 3,042 events the model never trained on</text>
+  <line x1="28" y1="62" x2="612" y2="62" class="rule"/>
+
+  <text x="28" y="90" class="label">EVENTS EVALUATED</text>
+  <text x="612" y="90" class="value">3,042</text>
+
+  <text x="28" y="116" class="label">NET RECOVERY vs. RETRY-EVERYTHING</text>
+  <text x="612" y="116" class="value-hi">1.42×</text>
+
+  <text x="28" y="142" class="label">ROC-AUC</text>
+  <text x="612" y="142" class="value">0.69</text>
+
+  <text x="28" y="168" class="label">AUTOMATED TESTS</text>
+  <text x="612" y="168" class="value">574</text>
+
+  <line x1="28" y1="182" x2="612" y2="182" class="rule"/>
+  <text x="28" y="202" class="sub">status: live · CI passing · typecheck + lint + eval on every push</text>
+</svg>
