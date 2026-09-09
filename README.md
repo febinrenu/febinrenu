@@ -1,7 +1,9 @@
 ### Febin Renu
-Coimbatore, India
+Hyderabad, India
 
-Development Lead at Entarch Solutions (remote, since Jan 2026) · final-year CS undergrad at Karunya Institute of Technology and Sciences (2023–2027, CGPA 9.39)
+Software Developer at Entarch Solutions (remote, since Jan 2026) · Software Engineering Intern / Dev Lead at Grids Apps LLC (remote, since Jul 2026)
+<br/>
+Final-year CS undergrad at Karunya Institute of Technology and Sciences (2023–2027, CGPA 9.39)
 
 <br/>
 
@@ -12,8 +14,6 @@ Systems where something has to be decided under uncertainty, and the decision ha
 <br/>
 
 ## Toolbox
-
-Everything below has actually shown up in a project, the current role, or resume-listed work above — nothing added to pad the list.
 
 **Languages**
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
