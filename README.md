@@ -30,7 +30,7 @@ I'd rather show you this table than let "AI Engineer" do the talking. Some of th
 
 ## Reclaim
 
-<img src="assets/reclaim-receipt.svg" alt="Receipt-style card: Reclaim held-out evaluation on 3,042 events. Net recovery versus retrying every payment: 1.42x. ROC-AUC: 0.69. Automated tests: 574. Status: live, CI passing." width="100%"/>
+<img src="assets/reclaim-engine.svg" alt="Animated diagram of Reclaim's real pipeline: failed-payment, abandoned-checkout, and overdue-invoice events flow into a risk engine (calibrated logistic regression plus expected-value optimization, 0.69 ROC-AUC), which routes most events to recover or do-nothing and a minority to human escalation, producing 1.42 times the net recovery of retrying every payment across 574 automated tests." width="100%"/>
 
 A risk-aware revenue recovery engine — [live](https://reclaim-lac-six.vercel.app), [source](https://github.com/febinrenu/reclaim). Most retry logic assumes recovering a failed payment is always worth attempting. Reclaim prices each action instead: a calibrated model estimates recovery probability, an expected-value calculation weighs it against the cost of trying, and the system is free to decide the correct answer is to leave it alone. TypeScript, Next.js, PostgreSQL, Razorpay, idempotent webhooks, a human-escalation budget for the cases too risky to automate.
 
