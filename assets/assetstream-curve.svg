@@ -1,0 +1,43 @@
+<svg width="860" height="220" viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="asTitle asDesc">
+  <title id="asTitle">AssetStream valuation curves, drawn live</title>
+  <desc id="asDesc">Line chart illustrating AssetStream's remarketing model: a naive straight-line, age-only depreciation estimate compared against a usage-telemetry-informed curve that ends at a higher retained value, drawn continuously to represent the model redrawing its estimate as new telemetry arrives.</desc>
+  <defs>
+    <style>
+      .bg { fill: #0d1117; }
+      .border { fill: none; stroke: #30363d; stroke-width: 1; }
+      .head { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 13px; fill: #e6edf3; font-weight: 700; }
+      .sub { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 10.5px; fill: #6e7681; }
+      .axis { stroke: #21262d; stroke-width: 1; }
+      .naive { fill: none; stroke: #6e7681; stroke-width: 2; stroke-dasharray: 4 4; }
+      .model { fill: none; stroke: #3fb950; stroke-width: 2.5; }
+      .lbl { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 11px; }
+      .lbl-naive { fill: #8b949e; }
+      .lbl-model { fill: #3fb950; }
+      .axlbl { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 10px; fill: #6e7681; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="1" y="1" width="858" height="218" rx="10"/>
+  <rect class="border" x="1" y="1" width="858" height="218" rx="10"/>
+
+  <text x="24" y="28" class="head">AssetStream — resale value, re-estimated as telemetry arrives</text>
+  <text x="24" y="44" class="sub">illustrative: the model conditions on usage telemetry, not just age — not a measured result like Reclaim's</text>
+
+  <line x1="60" y1="170" x2="780" y2="170" class="axis"/>
+  <line x1="60" y1="60" x2="60" y2="170" class="axis"/>
+  <text x="24" y="64" class="axlbl">100%</text>
+  <text x="24" y="174" class="axlbl">0%</text>
+  <text x="60" y="188" class="axlbl">lease start</text>
+  <text x="740" y="188" class="axlbl">lease end</text>
+
+  <path class="naive" pathLength="100" d="M60,60 L780,178"/>
+
+  <path class="model" pathLength="100" stroke-dasharray="100" d="M60,60 C220,108 320,142 440,150 C560,157 680,152 780,148">
+    <animate attributeName="stroke-dashoffset" values="100;0;0;100" keyTimes="0;0.55;0.85;1" dur="5s" repeatCount="indefinite"/>
+  </path>
+
+  <circle cx="780" cy="178" r="3.5" fill="#6e7681"/>
+  <text x="700" y="204" text-anchor="end" class="lbl lbl-naive">naive: age-only estimate</text>
+  <circle cx="780" cy="148" r="3.5" fill="#3fb950"/>
+  <text x="700" y="118" text-anchor="end" class="lbl lbl-model">model: usage-informed estimate</text>
+</svg>

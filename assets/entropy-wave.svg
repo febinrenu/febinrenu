@@ -1,0 +1,59 @@
+<svg width="860" height="220" viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ewTitle ewDesc">
+  <title id="ewTitle">Computational Entropy Lab — the question, visualized</title>
+  <desc id="ewDesc">Two continuously scrolling waveforms illustrating the hypothesis under test: a smooth, low-instability prompt signal above a jagged, high-instability one, next to illustrative energy-cost indicators. This represents the research question, not a proven or measured result.</desc>
+  <defs>
+    <style>
+      .bg { fill: #0d1117; }
+      .border { fill: none; stroke: #30363d; stroke-width: 1; }
+      .head { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 13px; fill: #e6edf3; font-weight: 700; }
+      .sub { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 10.5px; fill: #6e7681; }
+      .lanelbl { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 10.5px; fill: #c9d1d9; }
+      .energylbl { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 9px; fill: #6e7681; }
+      .waveLow { fill: none; stroke: #58a6ff; stroke-width: 2; }
+      .waveHigh { fill: none; stroke: #bc8cff; stroke-width: 2; }
+      .lane { fill: #0d1117; stroke: #21262d; stroke-width: 1; }
+    </style>
+    <clipPath id="clipLow"><rect x="60" y="50" width="560" height="44"/></clipPath>
+    <clipPath id="clipHigh"><rect x="60" y="130" width="560" height="44"/></clipPath>
+  </defs>
+
+  <rect class="bg" x="1" y="1" width="858" height="218" rx="10"/>
+  <rect class="border" x="1" y="1" width="858" height="218" rx="10"/>
+
+  <text x="24" y="28" class="head">computational entropy lab — is instability expensive?</text>
+  <text x="24" y="44" class="sub">the open question the repo tests, not a settled answer — demo data is explicitly flagged synthetic in-repo</text>
+
+  <rect class="lane" x="60" y="50" width="560" height="44" rx="4"/>
+  <rect class="lane" x="60" y="130" width="560" height="44" rx="4"/>
+  <text x="68" y="46" class="lanelbl">low semantic instability</text>
+  <text x="68" y="126" class="lanelbl">high semantic instability</text>
+
+  <g clip-path="url(#clipLow)">
+    <g>
+      <path class="waveLow" transform="translate(0,72)" d="M0,0 C20,-15 50,-15 70,0 C90,15 120,15 140,0 C160,-15 190,-15 210,0 C230,15 260,15 280,0 C300,-15 330,-15 350,0"/>
+      <path class="waveLow" transform="translate(350,72)" d="M0,0 C20,-15 50,-15 70,0 C90,15 120,15 140,0 C160,-15 190,-15 210,0 C230,15 260,15 280,0 C300,-15 330,-15 350,0"/>
+      <animateTransform attributeName="transform" type="translate" from="0 0" to="-350 0" dur="7s" repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <g clip-path="url(#clipHigh)">
+    <g>
+      <path class="waveHigh" transform="translate(0,152)" d="M0,0 L17.5,18 L35,-22 L52.5,10 L70,-15 L87.5,25 L105,-8 L122.5,20 L140,-25 L157.5,5 L175,15 L192.5,-18 L210,22 L227.5,-5 L245,-20 L262.5,12 L280,-12 L297.5,20 L315,-3 L332.5,-22 L350,0"/>
+      <path class="waveHigh" transform="translate(350,152)" d="M0,0 L17.5,18 L35,-22 L52.5,10 L70,-15 L87.5,25 L105,-8 L122.5,20 L140,-25 L157.5,5 L175,15 L192.5,-18 L210,22 L227.5,-5 L245,-20 L262.5,12 L280,-12 L297.5,20 L315,-3 L332.5,-22 L350,0"/>
+      <animateTransform attributeName="transform" type="translate" from="0 0" to="-350 0" dur="3.4s" repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <!-- illustrative energy indicators -->
+  <text x="700" y="46" class="energylbl">energy (illustrative)</text>
+  <rect x="700" y="58" width="16" height="24" fill="#30363d"/>
+  <rect x="700" y="70" width="16" height="12" fill="#58a6ff"/>
+  <rect x="726" y="58" width="16" height="24" fill="#30363d"/>
+  <rect x="726" y="66" width="16" height="16" fill="#58a6ff"/>
+
+  <text x="700" y="126" class="energylbl">energy (illustrative)</text>
+  <rect x="700" y="138" width="16" height="36" fill="#30363d"/>
+  <rect x="700" y="146" width="16" height="28" fill="#bc8cff"/>
+  <rect x="726" y="138" width="16" height="36" fill="#30363d"/>
+  <rect x="726" y="142" width="16" height="32" fill="#bc8cff"/>
+</svg>

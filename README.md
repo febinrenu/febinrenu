@@ -11,6 +11,10 @@ Systems where something has to be decided under uncertainty, and the decision ha
 
 <br/>
 
+<img src="assets/language-equalizer.svg" alt="Bar chart of the primary language reported by GitHub for each project featured in this README: TypeScript for three projects (Reclaim, AssetStream, Computational Entropy Lab), and one each of PHP (QuantroCode), Python (ml-loan), Jupyter Notebook (Bitcoin-LSTM), and JavaScript (BlogHaven)." width="100%"/>
+
+<br/>
+
 ## What's real, and how you can check
 
 | Area | What's actually there | Proof |
@@ -38,7 +42,17 @@ A risk-aware revenue recovery engine — [live](https://reclaim-lac-six.vercel.a
 
 ## AssetStream
 
+<img src="assets/assetstream-curve.svg" alt="Line chart illustrating AssetStream's remarketing model: a naive straight-line, age-only depreciation estimate compared against a usage-telemetry-informed curve that ends at a higher retained value, drawn continuously." width="100%"/>
+
 An AI-powered Equipment-as-a-Service platform — [live](https://assetstream-frontend.onrender.com), [source](https://github.com/febinrenu/AssetStream). Simulates lease originations, IoT-driven usage billing, and end-of-lease remarketing for leased industrial equipment. A Django + Celery + Redis engine turns live telemetry into invoices on a billing cycle; a scikit-learn regression model prices resale value so the remarketing call isn't a guess. Next.js/TypeScript frontend, Groq LLM integration, fully Dockerized.
+
+<br/>
+
+## Computational Entropy Lab
+
+<img src="assets/entropy-wave.svg" alt="Two continuously scrolling waveforms illustrating the hypothesis under test: a smooth, low-instability prompt signal above a jagged, high-instability one, next to illustrative energy-cost indicators. Represents the open research question, not a proven result." width="100%"/>
+
+A FastAPI/React research platform testing a specific hypothesis: does semantic instability in a prompt carry a measurable inference-energy cost? [Source](https://github.com/febinrenu/comp_entropy). It's explicit about the line between real and synthetic — demo data is flagged `measurement_source: synthetic_simulation` in the API so it's never mistaken for a result. Built because the question was interesting, not because anyone asked for it.
 
 <br/>
 
@@ -54,7 +68,7 @@ An AI-powered Equipment-as-a-Service platform — [live](https://assetstream-fro
 
 - **[QuantroCode](https://github.com/febinrenu/QuantroCode)** — multi-tenant POS/ERP SaaS in PHP/Vue: custom domains, pharmacy batch tracking, POS hardware integration, client billing portal.
 - **BlogHaven** — MERN blogging platform, role-based auth, moderation workflows, admin analytics. [Live](https://bloghaven-draft.netlify.app).
-- **[Computational Entropy Lab](https://github.com/febinrenu/comp_entropy)** — a FastAPI/React research platform testing whether semantic instability in a prompt has a measurable energy cost. Built because the question was interesting.
+- **[Bitcoin-LSTM](https://github.com/febinrenu/Bitcoin-Price-Prediction-using-LSTM)** — early ML work: an LSTM forecaster evaluated on MSE/RMSE, not a trading signal.
 
 <br/>
 

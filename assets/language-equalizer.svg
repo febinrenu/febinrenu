@@ -1,0 +1,64 @@
+<svg width="860" height="200" viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="leTitle leDesc">
+  <title id="leTitle">Primary language across featured projects</title>
+  <desc id="leDesc">Bar chart of the primary language GitHub reports for each project featured in this README: TypeScript for three (Reclaim, AssetStream, Computational Entropy Lab), and one each of PHP (QuantroCode), Python (ml-loan), Jupyter Notebook (Bitcoin-LSTM), and JavaScript (BlogHaven).</desc>
+  <defs>
+    <style>
+      .bg { fill: #0d1117; }
+      .border { fill: none; stroke: #30363d; stroke-width: 1; }
+      .head { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 13px; fill: #e6edf3; font-weight: 700; }
+      .sub { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 10px; fill: #6e7681; }
+      .barlabel { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 11px; fill: #c9d1d9; }
+      .barcount { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 10px; fill: #8b949e; }
+      .base { stroke: #21262d; stroke-width: 1; }
+      .b1 { fill: #3178c6; } .b2 { fill: #777bb4; } .b3 { fill: #3776ab; } .b4 { fill: #dd8f37; } .b5 { fill: #d4b83f; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="1" y="1" width="858" height="198" rx="10"/>
+  <rect class="border" x="1" y="1" width="858" height="198" rx="10"/>
+
+  <text x="24" y="28" class="head">primary language, by project featured here</text>
+  <text x="24" y="43" class="sub">reclaim · AssetStream · comp_entropy · QuantroCode · ml-loan · Bitcoin-LSTM · BlogHaven — via the GitHub API</text>
+
+  <line x1="60" y1="164" x2="800" y2="164" class="base"/>
+
+  <!-- TypeScript x3 -->
+  <rect class="b1" x="90" y="54" width="46" height="110">
+    <animate attributeName="height" values="110;100;110" dur="2.6s" repeatCount="indefinite"/>
+    <animate attributeName="y" values="54;64;54" dur="2.6s" repeatCount="indefinite"/>
+  </rect>
+  <text x="113" y="180" text-anchor="middle" class="barlabel">TypeScript</text>
+  <text x="113" y="194" text-anchor="middle" class="barcount">×3</text>
+
+  <!-- PHP x1 -->
+  <rect class="b2" x="230" y="119" width="46" height="45">
+    <animate attributeName="height" values="45;37;45" dur="3.1s" repeatCount="indefinite"/>
+    <animate attributeName="y" values="119;127;119" dur="3.1s" repeatCount="indefinite"/>
+  </rect>
+  <text x="253" y="180" text-anchor="middle" class="barlabel">PHP</text>
+  <text x="253" y="194" text-anchor="middle" class="barcount">×1</text>
+
+  <!-- Python x1 -->
+  <rect class="b3" x="370" y="119" width="46" height="45">
+    <animate attributeName="height" values="45;39;45" dur="2.3s" repeatCount="indefinite"/>
+    <animate attributeName="y" values="119;125;119" dur="2.3s" repeatCount="indefinite"/>
+  </rect>
+  <text x="393" y="180" text-anchor="middle" class="barlabel">Python</text>
+  <text x="393" y="194" text-anchor="middle" class="barcount">×1</text>
+
+  <!-- Jupyter x1 -->
+  <rect class="b4" x="510" y="119" width="46" height="45">
+    <animate attributeName="height" values="45;40;45" dur="3.4s" repeatCount="indefinite"/>
+    <animate attributeName="y" values="119;124;119" dur="3.4s" repeatCount="indefinite"/>
+  </rect>
+  <text x="533" y="180" text-anchor="middle" class="barlabel">Jupyter</text>
+  <text x="533" y="194" text-anchor="middle" class="barcount">×1</text>
+
+  <!-- JavaScript x1 -->
+  <rect class="b5" x="650" y="119" width="46" height="45">
+    <animate attributeName="height" values="45;38;45" dur="2.9s" repeatCount="indefinite"/>
+    <animate attributeName="y" values="119;126;119" dur="2.9s" repeatCount="indefinite"/>
+  </rect>
+  <text x="673" y="180" text-anchor="middle" class="barlabel">JavaScript</text>
+  <text x="673" y="194" text-anchor="middle" class="barcount">×1</text>
+</svg>
