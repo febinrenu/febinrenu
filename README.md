@@ -24,11 +24,21 @@ The model sees every field on the card. **It can't read the note.** That's your 
 Press a button and an issue opens with your move already filled in. Hit **Create**, and within about a minute a bot scores you against the model, updates this board and deals the next case. You need a GitHub account; that's all.
 
 <!-- GAME:START -->
-<img src="assets/game/case.svg?v=1" width="100%" alt="Case 1: ₹3,000 failed payment, do not honor, 1 prior retry, customer for 11 months, 2 past payments ok, via UPI. Note: opened the payment-link email three times. Humans ±₹0, model ±₹0."/>
+<img src="assets/game/case.svg?v=2" width="100%" alt="Case 2: ₹8,850 failed payment, do not honor, 0 prior retries, customer for 31 months, 0 past payments ok, via UPI. Note: updated their card in the profile yesterday. Humans ±₹0, model ±₹0."/>
 
-<p align="center"><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Crecover%7C1&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><img src="assets/game/btn-recover.svg" width="32%" alt="RECOVER"/></a><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Cescalate%7C1&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><img src="assets/game/btn-escalate.svg" width="32%" alt="ESCALATE"/></a><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Cleave%7C1&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><img src="assets/game/btn-leave.svg" width="32%" alt="LEAVE IT"/></a></p>
+<p align="center"><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Crecover%7C2&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><img src="assets/game/btn-recover.svg" width="32%" alt="RECOVER"/></a><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Cescalate%7C2&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><img src="assets/game/btn-escalate.svg" width="32%" alt="ESCALATE"/></a><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Cleave%7C2&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><img src="assets/game/btn-leave.svg" width="32%" alt="LEAVE IT"/></a></p>
 
-_No moves yet. The first click sets the scoreboard._
+| case | player | their call | model's call | edge |
+|---|---|---|---|---|
+| #1 | @febinrenu | LEAVE IT | LEAVE IT | ±₹0 |
+
+<details><summary><b>Leaderboard</b>: total edge over the model</summary>
+
+| # | player | edge | moves | wins |
+|---|---|---|---|---|
+| 1 | @febinrenu | ±₹0 | 1 | 0 |
+
+</details>
 <!-- GAME:END -->
 
 <details>

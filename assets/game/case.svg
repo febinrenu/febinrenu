@@ -1,6 +1,6 @@
 <svg width="900" height="330" viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d">
-  <title id="t">Out-decide my model, case 1</title>
-  <desc id="d">Case 1: a failed payment of ₹3,000, reason do not honor, 1 prior retry, customer for 11 months, 2 past payments succeeded, paid by UPI. Note on file: opened the payment-link email three times. Scoreboard: humans ±₹0, model ±₹0, rounds won 0, tied 0, lost 0.</desc>
+  <title id="t">Out-decide my model, case 2</title>
+  <desc id="d">Case 2: a failed payment of ₹8,850, reason do not honor, 0 prior retries, customer for 31 months, 0 past payments succeeded, paid by UPI. Note on file: updated their card in the profile yesterday. Scoreboard: humans ±₹0, model ±₹0, rounds won 0, tied 1, lost 0.</desc>
   <defs>
     <style>
       .bg { fill: #0d1117; } .edge { fill: none; stroke: #30363d; }
@@ -27,17 +27,17 @@
   <rect class="scan" x="1" y="0" width="898" height="40" fill="url(#sl)"/>
   <rect class="edge" x="1" y="1" width="898" height="328" rx="12"/>
 
-  <text x="36" y="40" class="tag">CASE #0001 · FAILED PAYMENT</text>
+  <text x="36" y="40" class="tag">CASE #0002 · FAILED PAYMENT</text>
   <circle cx="545" cy="36" r="5" fill="#f85149" class="live"/>
   <text x="557" y="40" class="tag" style="fill:#f85149">YOUR MOVE</text>
-  <text x="36" y="92" class="amt">₹3,000</text>
+  <text x="36" y="92" class="amt">₹8,850</text>
   <rect x="36" y="108" width="111" height="24" rx="12" fill="#d29922"/>
   <text x="46" y="124" class="chip">do not honor</text>
-  <text x="36" y="168" class="k">prior retries</text><text x="36" y="186" class="v">1</text><text x="246" y="168" class="k">customer for</text><text x="246" y="186" class="v">11 mo</text><text x="36" y="208" class="k">past payments ok</text><text x="36" y="226" class="v">2</text><text x="246" y="208" class="k">channel</text><text x="246" y="226" class="v">UPI</text>
+  <text x="36" y="168" class="k">prior retries</text><text x="36" y="186" class="v">0</text><text x="246" y="168" class="k">customer for</text><text x="246" y="186" class="v">31 mo</text><text x="36" y="208" class="k">past payments ok</text><text x="36" y="226" class="v">0</text><text x="246" y="208" class="k">channel</text><text x="246" y="226" class="v">UPI</text>
 
   <rect x="36" y="252" width="424" height="56" rx="8" fill="#1c1a12" stroke="#d29922" stroke-opacity=".5" class="glow"/>
   <text x="50" y="272" class="noteh">NOTE ON FILE · THE MODEL CAN'T READ THIS</text>
-  <text x="50" y="294" class="note">opened the payment-link email three times</text>
+  <text x="50" y="294" class="note">updated their card in the profile yesterday</text>
 
   <line x1="490" y1="60" x2="490" y2="300" stroke="#21262d" stroke-width="2"/>
   <text x="520" y="92" class="tag">HUMANS vs MODEL · NET RECOVERED</text>
@@ -49,8 +49,8 @@
   <text x="864" y="182" class="big" text-anchor="end">±₹0</text>
   <rect x="520" y="192" width="344" height="12" rx="6" fill="#161b22"/>
   <rect x="520" y="192" width="4.0" height="12" rx="6" fill="#58a6ff" class="grow"/>
-  <text x="520" y="236" class="sm">rounds · humans won 0 · tied 0 · lost 0</text>
-  <text x="520" y="262" class="sm">no moves yet: the first person to play sets the scoreboard</text>
-  <text x="520" y="280" class="sm"></text>
+  <text x="520" y="236" class="sm">rounds · humans won 0 · tied 1 · lost 0</text>
+  <text x="520" y="262" class="sm">last: @febinrenu chose LEAVE IT on #1, model chose LEAVE I</text>
+  <text x="520" y="280" class="sm">T → humans ±₹0</text>
   <text x="520" y="306" class="tag">PICK BELOW ↓</text>
 </svg>
