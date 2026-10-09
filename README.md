@@ -28,17 +28,7 @@ Press a button and an issue opens with your move already filled in. Hit **Create
 
 <p align="center"><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Crecover%7C2&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><img src="assets/game/btn-recover.svg" width="32%" alt="RECOVER"/></a><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Cescalate%7C2&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><img src="assets/game/btn-escalate.svg" width="32%" alt="ESCALATE"/></a><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Cleave%7C2&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><img src="assets/game/btn-leave.svg" width="32%" alt="LEAVE IT"/></a></p>
 
-| case | player | their call | model's call | edge |
-|---|---|---|---|---|
-| #1 | @febinrenu | LEAVE IT | LEAVE IT | ±₹0 |
-
-<details><summary><b>Leaderboard</b>: total edge over the model</summary>
-
-| # | player | edge | moves | wins |
-|---|---|---|---|---|
-| 1 | @febinrenu | ±₹0 | 1 | 0 |
-
-</details>
+_No moves yet. The first click sets the scoreboard._
 <!-- GAME:END -->
 
 <details>

@@ -1,6 +1,6 @@
 <svg width="900" height="330" viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d">
   <title id="t">Out-decide my model, case 2</title>
-  <desc id="d">Case 2: a failed payment of ₹8,850, reason do not honor, 0 prior retries, customer for 31 months, 0 past payments succeeded, paid by UPI. Note on file: updated their card in the profile yesterday. Scoreboard: humans ±₹0, model ±₹0, rounds won 0, tied 1, lost 0.</desc>
+  <desc id="d">Case 2: a failed payment of ₹8,850, reason do not honor, 0 prior retries, customer for 31 months, 0 past payments succeeded, paid by UPI. Note on file: updated their card in the profile yesterday. Scoreboard: humans ±₹0, model ±₹0, rounds won 0, tied 0, lost 0.</desc>
   <defs>
     <style>
       .bg { fill: #0d1117; } .edge { fill: none; stroke: #30363d; }
@@ -49,8 +49,8 @@
   <text x="864" y="182" class="big" text-anchor="end">±₹0</text>
   <rect x="520" y="192" width="344" height="12" rx="6" fill="#161b22"/>
   <rect x="520" y="192" width="4.0" height="12" rx="6" fill="#58a6ff" class="grow"/>
-  <text x="520" y="236" class="sm">rounds · humans won 0 · tied 1 · lost 0</text>
-  <text x="520" y="262" class="sm">last: @febinrenu chose LEAVE IT on #1, model chose LEAVE I</text>
-  <text x="520" y="280" class="sm">T → humans ±₹0</text>
+  <text x="520" y="236" class="sm">rounds · humans won 0 · tied 0 · lost 0</text>
+  <text x="520" y="262" class="sm">no moves yet: the first person to play sets the scoreboard</text>
+  <text x="520" y="280" class="sm"></text>
   <text x="520" y="306" class="tag">PICK BELOW ↓</text>
 </svg>
