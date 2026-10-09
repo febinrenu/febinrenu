@@ -1,0 +1,50 @@
+name: out-decide-my-model
+
+# A visitor clicks a button in the README, which opens an issue titled
+# "reclaim|<action>|<case>". This scores the move, updates the README and closes the issue.
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  move:
+    if: startsWith(github.event.issue.title, 'reclaim|')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Score the move and publish it
+        env:
+          TITLE: ${{ github.event.issue.title }}
+          PLAYER: ${{ github.event.issue.user.login }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Two moves can race. The loser rebuilds on the winner's state, so its move is then judged stale.
+          published=no
+          for attempt in 1 2 3 4 5 6; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            python3 game/engine.py play --title "$TITLE" --user "$PLAYER" --comment-out "$RUNNER_TEMP/comment.md"
+            git add README.md game/state.json assets/game/case.svg
+            if git diff --cached --quiet; then published=yes; break; fi
+            git commit -q -m "game: @$PLAYER plays a case"
+            if git push -q origin HEAD:main; then published=yes; break; fi
+            sleep $((attempt * 2))
+          done
+          if [ "$published" = no ]; then
+            echo "Too many moves at once and yours didn't land. Please try the button again." > "$RUNNER_TEMP/comment.md"
+          fi
+
+      - name: Reply and close
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: gh issue close "$ISSUE" --repo "$GITHUB_REPOSITORY" --reason completed --comment "$(cat "$RUNNER_TEMP/comment.md")"

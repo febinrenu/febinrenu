@@ -1,0 +1,77 @@
+<svg width="900" height="300" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="scT scD">
+  <title id="scT">ScopeCompose: composing a rule and its exception instead of picking one</title>
+  <desc id="scD">Illustration of ScopeCompose. Passage A says international transactions incur a 3% fee. Passage B says fees are waived for premium-tier cardholders. In the top lane, source selection, the way prior conflict-aware RAG works, ranks the sources and answers "3% fee": the exception branch is deleted and a premium cardholder gets the wrong answer, a suppression rate of 1 of 1. In the bottom lane, ScopeCompose labels the conflict conditional, finds the scope relation is a refinement, and composes both: if premium-tier, the fee is waived, otherwise 3%. Suppression rate 0 of 1.</desc>
+  <defs>
+    <style>
+      text { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
+      .head { font-size: 13px; fill: #e6edf3; font-weight: 700; } .sub { font-size: 10.5px; fill: #6e7681; }
+      .colh { font-size: 10px; fill: #8b949e; letter-spacing: 1px; } .p { font-size: 11px; fill: #c9d1d9; }
+      .dim { font-size: 10px; fill: #6e7681; } .out { font-size: 12px; fill: #e6edf3; font-weight: 700; }
+      .flow { stroke-dasharray: 2 7; animation: flow 1s linear infinite; }
+      .s1 { animation: s1 10s infinite; } .s2 { animation: s2 10s infinite; } .s3 { animation: s3 10s infinite; }
+      .s4 { animation: s4 10s infinite; } .s5 { animation: s5 10s infinite; } .s6 { animation: s6 10s infinite; }
+      .strike { stroke-dasharray: 260; animation: strike 10s ease-in-out infinite; }
+      .ghost { animation: ghost 10s infinite; }
+      .tree { stroke-dasharray: 160; animation: tree 10s ease-in-out infinite; }
+      .meterR { transform-box: fill-box; transform-origin: left; animation: meter 10s cubic-bezier(.2,.8,.2,1) infinite; }
+      @keyframes flow { to { stroke-dashoffset: -9; } }
+      @keyframes s1 { 0%, 14% { opacity: 0; } 18%, 94% { opacity: 1; } 99%, 100% { opacity: 0; } }
+      @keyframes s2 { 0%, 26% { opacity: 0; } 30%, 94% { opacity: 1; } 99%, 100% { opacity: 0; } }
+      @keyframes s3 { 0%, 38% { opacity: 0; } 42%, 94% { opacity: 1; } 99%, 100% { opacity: 0; } }
+      @keyframes s4 { 0%, 50% { opacity: 0; } 54%, 94% { opacity: 1; } 99%, 100% { opacity: 0; } }
+      @keyframes s5 { 0%, 58% { opacity: 0; } 62%, 94% { opacity: 1; } 99%, 100% { opacity: 0; } }
+      @keyframes s6 { 0%, 68% { opacity: 0; } 72%, 94% { opacity: 1; } 99%, 100% { opacity: 0; } }
+      @keyframes strike { 0%, 30% { stroke-dashoffset: 260; } 38%, 94% { stroke-dashoffset: 0; } 99%, 100% { stroke-dashoffset: 260; } }
+      @keyframes ghost { 0%, 30% { opacity: 1; } 40%, 94% { opacity: .5; } 99%, 100% { opacity: 1; } }
+      @keyframes tree { 0%, 46% { stroke-dashoffset: 160; } 58%, 94% { stroke-dashoffset: 0; } 99%, 100% { stroke-dashoffset: 160; } }
+      @keyframes meter { 0%, 68% { transform: scaleX(0); } 76%, 94% { transform: scaleX(1); } 99%, 100% { transform: scaleX(0); } }
+    </style>
+  </defs>
+
+  <rect x="1" y="1" width="898" height="298" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <text x="24" y="30" class="head">scopecompose — a rule and its exception are both true</text>
+  <text x="24" y="46" class="sub">conflict-aware RAG picks the most credible source · that silently deletes the exception</text>
+
+  <!-- the two passages -->
+  <rect x="24" y="96" width="262" height="48" rx="6" fill="#0b1220" stroke="#58a6ff" stroke-opacity=".6"/>
+  <text x="36" y="114" class="colh" fill="#58a6ff">A · GENERAL RULE</text>
+  <text x="36" y="132" class="p">International transactions: 3% fee.</text>
+  <rect x="24" y="160" width="262" height="48" rx="6" fill="#0b1220" stroke="#d29922" stroke-opacity=".6"/>
+  <text x="36" y="178" class="colh" fill="#d29922">B · EXCEPTION</text>
+  <text x="36" y="196" class="p">Waived for premium-tier cardholders.</text>
+
+  <path class="flow" d="M286,120 C316,120 316,100 340,100" stroke="#8b949e" stroke-width="2" fill="none"/>
+  <path class="flow" d="M286,184 C316,184 316,100 340,100" stroke="#8b949e" stroke-width="2" fill="none"/>
+  <path class="flow" d="M286,120 C316,120 316,214 340,214" stroke="#8b949e" stroke-width="2" fill="none"/>
+  <path class="flow" d="M286,184 C316,184 316,214 340,214" stroke="#8b949e" stroke-width="2" fill="none"/>
+
+  <!-- lane 1: source selection -->
+  <rect x="340" y="62" width="536" height="96" rx="6" fill="#0b1220" stroke="#30363d"/>
+  <text x="354" y="80" class="colh">SOURCE SELECTION · PRIOR WORK</text>
+  <g class="s1"><rect x="354" y="90" width="132" height="24" rx="12" fill="#161b22" stroke="#30363d"/><text x="420" y="106" class="dim" text-anchor="middle" fill="#c9d1d9">rank sources</text></g>
+  <g class="s2"><path d="M486,102 h18" stroke="#8b949e"/><text x="512" y="107" class="out">"3% fee."</text></g>
+  <g class="ghost"><rect x="618" y="90" width="242" height="24" rx="4" fill="#2b210b" stroke="#d29922" stroke-opacity=".5"/><text x="628" y="106" class="dim" fill="#d29922">premium-tier → waived</text></g>
+  <path class="strike" d="M614,103 L866,101" stroke="#f85149" stroke-width="2.5"/>
+  <g class="s3">
+    <text x="618" y="132" class="dim" fill="#f85149">branch deleted</text>
+    <text x="354" y="146" class="dim">a premium cardholder is told they pay 3%</text>
+  </g>
+  <g class="s6"><text x="862" y="146" class="dim" text-anchor="end" fill="#f85149">suppression 1/1</text></g>
+  <rect x="740" y="124" width="122" height="6" rx="3" fill="#161b22"/><rect class="meterR" x="740" y="124" width="122" height="6" rx="3" fill="#f85149"/>
+
+  <!-- lane 2: scopecompose -->
+  <rect x="340" y="170" width="536" height="112" rx="6" fill="#0b1220" stroke="#3fb950" stroke-opacity=".45"/>
+  <text x="354" y="188" class="colh" fill="#3fb950">SCOPECOMPOSE</text>
+  <g class="s1"><rect x="354" y="200" width="150" height="24" rx="12" fill="#161b22" stroke="#30363d"/><text x="429" y="216" class="dim" text-anchor="middle" fill="#c9d1d9">type: conditional</text></g>
+  <g class="s3"><rect x="354" y="232" width="150" height="24" rx="12" fill="#161b22" stroke="#30363d"/><text x="429" y="248" class="dim" text-anchor="middle" fill="#c9d1d9">scope: refinement</text></g>
+  <g class="s4"><text x="524" y="232" class="out">fee?</text></g>
+  <path class="tree" d="M560,228 C580,228 584,208 604,208 M560,228 C580,228 584,250 604,250" stroke="#3fb950" stroke-width="2" fill="none"/>
+  <g class="s5"><text x="612" y="212" class="p"><tspan fill="#d29922">premium-tier</tspan> → waived</text></g>
+  <g class="s5"><text x="612" y="254" class="p"><tspan fill="#58a6ff">otherwise</tspan> → 3%</text></g>
+  <g class="s6"><text x="862" y="274" class="dim" text-anchor="end" fill="#3fb950">suppression 0/1</text></g>
+  <rect x="740" y="262" width="122" height="6" rx="3" fill="#161b22"/>
+
+  <text x="24" y="236" class="dim">research in progress</text>
+  <text x="24" y="252" class="dim">pipeline built · 501 tests</text>
+  <text x="24" y="268" class="dim">annotation and live runs underway</text>
+</svg>

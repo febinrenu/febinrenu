@@ -1,0 +1,13 @@
+{
+  "case": 1,
+  "humans": 0.0,
+  "model": 0.0,
+  "rounds": {
+    "won": 0,
+    "tied": 0,
+    "lost": 0
+  },
+  "moves": [],
+  "players": {},
+  "updated": null
+}

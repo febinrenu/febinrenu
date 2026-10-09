@@ -1,0 +1,104 @@
+<svg width="900" height="300" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="prT prD">
+  <title id="prT">PRISM: when a model's reading of a tax law changes the conclusion, find the clause</title>
+  <desc id="prD">Illustration of PRISM, not a result. A paraphrased income-tax rebate clause (section 87A: a resident individual with total income up to 7 lakh rupees gets a rebate of up to 25,000 rupees) is extracted twice: by an expert coding and by a language model that picked up the older regime's figures (5 lakh, 12,500). Both rule sets run on a simulated taxpayer population. Effective tax rates by income decile match everywhere except deciles 5 to 7, where the model's reading charges tax the law does not. A trace line runs from the diverging bars back to the exact words in the clause.</desc>
+  <defs>
+    <style>
+      text { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
+      .head { font-size: 13px; fill: #e6edf3; font-weight: 700; } .sub { font-size: 10.5px; fill: #6e7681; }
+      .law { font-size: 11.5px; fill: #c9d1d9; } .colh { font-size: 10px; fill: #8b949e; letter-spacing: 1px; }
+      .code { font-size: 11px; fill: #c9d1d9; } .dim { font-size: 10px; fill: #6e7681; } .tick { font-size: 9px; fill: #6e7681; }
+      .bar { transform-box: fill-box; transform-origin: bottom; animation: bar 12s cubic-bezier(.2,.8,.2,1) infinite; }
+      .div { animation: bar 12s cubic-bezier(.2,.8,.2,1) infinite, flash 12s steps(1) infinite; }
+      .flow { stroke-dasharray: 2 7; animation: flow 1s linear infinite; }
+      .ruleE { animation: inE 12s infinite; } .ruleL { animation: inL 12s infinite; }
+      .hiE { animation: hiE 12s infinite; } .hiBad { animation: hiBad 12s infinite; }
+      .trace { stroke-dasharray: 1000; animation: trace 12s ease-in-out infinite; }
+      .verdict { animation: verdict 12s infinite; }
+      @keyframes bar { 0%, 30% { transform: scaleY(0); } 42%, 94% { transform: scaleY(1); } 100% { transform: scaleY(0); } }
+      @keyframes flash { 0%, 50% { fill: #d29922; } 52%, 54%, 56%, 58% { fill: #f85149; } 53%, 55%, 57% { fill: #d29922; } 59%, 94% { fill: #f85149; } 95%, 100% { fill: #d29922; } }
+      @keyframes flow { to { stroke-dashoffset: -9; } }
+      @keyframes inE { 0%, 8% { opacity: 0; transform: translateX(-8px); } 14%, 94% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; } }
+      @keyframes inL { 0%, 16% { opacity: 0; transform: translateX(-8px); } 22%, 94% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; } }
+      @keyframes hiE { 0%, 6% { fill-opacity: 0; } 10%, 94% { fill-opacity: .22; } 100% { fill-opacity: 0; } }
+      @keyframes hiBad { 0%, 62% { fill-opacity: 0; stroke-opacity: 0; } 66%, 94% { fill-opacity: .25; stroke-opacity: 1; } 100% { fill-opacity: 0; stroke-opacity: 0; } }
+      @keyframes trace { 0%, 52% { stroke-dashoffset: 1000; opacity: 1; } 66%, 94% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+      @keyframes verdict { 0%, 66% { opacity: 0; } 70%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    </style>
+  </defs>
+
+  <rect x="1" y="1" width="898" height="298" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <text x="24" y="30" class="head">prism — does the model's reading of the law reach the expert's conclusion?</text>
+  <text x="24" y="46" class="sub">statute → grounded rules → microsimulation → every divergence traced to its clause</text>
+
+  <!-- the statute -->
+  <rect x="24" y="62" width="276" height="150" rx="6" fill="#0b1220" stroke="#30363d"/>
+  <text x="38" y="82" class="colh">s.87A · REBATE (paraphrased)</text>
+  <rect class="hiE" x="36" y="120" width="94" height="18" rx="3" fill="#58a6ff"/>
+  <rect class="hiBad" x="35" y="179" width="62" height="18" rx="3" fill="#f85149" stroke="#f85149"/>
+  <text x="38" y="112" class="law">a resident individual whose</text>
+  <text x="38" y="132" class="law">₹7,00,000 or less of total</text>
+  <text x="38" y="152" class="law">income gets a rebate of up to</text>
+  <text x="38" y="172" class="law">its tax, capped at</text>
+  <text x="38" y="192" class="law"><tspan fill="#e6edf3" font-weight="700">₹25,000</tspan>.</text>
+
+  <!-- extraction -->
+  <path class="flow" d="M300,110 C330,110 330,96 352,96" stroke="#58a6ff" stroke-width="2" fill="none"/>
+  <path class="flow" d="M300,170 C330,170 330,166 352,166" stroke="#d29922" stroke-width="2" fill="none"/>
+  <g class="ruleE">
+    <rect x="352" y="68" width="228" height="62" rx="6" fill="#0d1a2b" stroke="#58a6ff" stroke-opacity=".7"/>
+    <text x="364" y="86" class="colh" fill="#58a6ff">EXPERT CODING</text>
+    <text x="364" y="104" class="code">if income ≤ 7,00,000:</text>
+    <text x="380" y="120" class="code">rebate = min(tax, 25,000)</text>
+  </g>
+  <g class="ruleL">
+    <rect x="352" y="138" width="228" height="62" rx="6" fill="#2b210b" stroke="#d29922" stroke-opacity=".7"/>
+    <text x="364" y="156" class="colh" fill="#d29922">LLM EXTRACTION</text>
+    <text x="364" y="174" class="code">if income ≤ 5,00,000:</text>
+    <text x="380" y="190" class="code">rebate = min(tax, 12,500)</text>
+  </g>
+
+  <!-- the simulation -->
+  <text x="604" y="76" class="colh">EFFECTIVE TAX RATE BY INCOME DECILE</text>
+  <rect x="604" y="86" width="9" height="9" fill="#58a6ff"/><text x="618" y="94" class="dim">expert</text>
+  <rect x="672" y="86" width="9" height="9" fill="#d29922"/><text x="686" y="94" class="dim">LLM</text>
+  <line x1="600" y1="246" x2="876" y2="246" stroke="#30363d"/>
+    <rect class="bar" style="animation-delay:0.00s" x="604" y="244.5" width="10" height="1.5" fill="#58a6ff"/>
+    <rect class="bar" style="animation-delay:0.00s" x="615" y="244.5" width="10" height="1.5" fill="#d29922"/>
+    <text x="614.5" y="260" class="tick" text-anchor="middle">1</text>
+    <rect class="bar" style="animation-delay:0.05s" x="631" y="244.5" width="10" height="1.5" fill="#58a6ff"/>
+    <rect class="bar" style="animation-delay:0.05s" x="642" y="244.5" width="10" height="1.5" fill="#d29922"/>
+    <text x="641.5" y="260" class="tick" text-anchor="middle">2</text>
+    <rect class="bar" style="animation-delay:0.10s" x="658" y="244.5" width="10" height="1.5" fill="#58a6ff"/>
+    <rect class="bar" style="animation-delay:0.10s" x="669" y="244.5" width="10" height="1.5" fill="#d29922"/>
+    <text x="668.5" y="260" class="tick" text-anchor="middle">3</text>
+    <rect class="bar" style="animation-delay:0.15s" x="685" y="244.5" width="10" height="1.5" fill="#58a6ff"/>
+    <rect class="bar" style="animation-delay:0.15s" x="696" y="244.5" width="10" height="1.5" fill="#d29922"/>
+    <text x="695.5" y="260" class="tick" text-anchor="middle">4</text>
+    <rect class="bar" style="animation-delay:0.20s" x="712" y="244.5" width="10" height="1.5" fill="#58a6ff"/>
+    <rect class="bar div" style="animation-delay:0.20s" x="723" y="229.9" width="10" height="16.1" fill="#d29922"/>
+    <text x="722.5" y="260" class="tick" text-anchor="middle">5</text>
+    <rect class="bar" style="animation-delay:0.25s" x="739" y="244.5" width="10" height="1.5" fill="#58a6ff"/>
+    <rect class="bar div" style="animation-delay:0.25s" x="750" y="216.1" width="10" height="29.9" fill="#d29922"/>
+    <text x="749.5" y="260" class="tick" text-anchor="middle">6</text>
+    <rect class="bar" style="animation-delay:0.30s" x="766" y="239.1" width="10" height="6.9" fill="#58a6ff"/>
+    <rect class="bar div" style="animation-delay:0.30s" x="777" y="210.3" width="10" height="35.6" fill="#d29922"/>
+    <text x="776.5" y="260" class="tick" text-anchor="middle">7</text>
+    <rect class="bar" style="animation-delay:0.35s" x="793" y="221.8" width="10" height="24.2" fill="#58a6ff"/>
+    <rect class="bar" style="animation-delay:0.35s" x="804" y="221.8" width="10" height="24.2" fill="#d29922"/>
+    <text x="803.5" y="260" class="tick" text-anchor="middle">8</text>
+    <rect class="bar" style="animation-delay:0.40s" x="820" y="190.8" width="10" height="55.2" fill="#58a6ff"/>
+    <rect class="bar" style="animation-delay:0.40s" x="831" y="190.8" width="10" height="55.2" fill="#d29922"/>
+    <text x="830.5" y="260" class="tick" text-anchor="middle">9</text>
+    <rect class="bar" style="animation-delay:0.45s" x="847" y="113.8" width="10" height="132.2" fill="#58a6ff"/>
+    <rect class="bar" style="animation-delay:0.45s" x="858" y="113.8" width="10" height="132.2" fill="#d29922"/>
+    <text x="857.5" y="260" class="tick" text-anchor="middle">10</text>
+  <path class="trace" d="M736,212 C730,292 300,292 190,262 C110,240 72,228 66,203" fill="none" stroke="#f85149" stroke-width="1.8"/>
+  <path class="verdict" d="M60,213 L66,201 L72,213 z" fill="#f85149"/>
+  <g class="verdict">
+    <rect x="352" y="208" width="232" height="58" rx="6" fill="#2d1214" stroke="#f85149" stroke-opacity=".7"/>
+    <text x="364" y="226" class="code" fill="#ffa198">divergence in deciles 5–7</text>
+    <text x="364" y="242" class="dim" fill="#ffa198">traced to s.87A, "₹25,000": the</text>
+    <text x="364" y="256" class="dim" fill="#ffa198">model read the older regime's figures</text>
+  </g>
+  <text x="876" y="290" class="dim" text-anchor="end">illustrative · not a result</text>
+</svg>

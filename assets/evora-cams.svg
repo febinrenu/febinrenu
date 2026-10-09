@@ -1,0 +1,137 @@
+<svg width="900" height="300" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="evT evD">
+  <title id="evT">evora: asking four cameras a question</title>
+  <desc id="evD">Illustration of evora. Four camera feeds tick along with live timestamps. A question types itself out: did a red car pass the main gate in the last hour. A scan sweeps the feeds, a circle lands on the red car at the gate in camera 1, and the answer appears with camera, time, clip and reasons. A dotted track follows one person from camera 2 to camera 4. A badge says everything runs on this machine with faces blurred. Measured on the MEVA dev split: Hit@5 0.72, negative precision 1.00.</desc>
+  <defs>
+    <style>
+      text { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
+      .lab { font-size: 10px; fill: #c9d1d9; } .dim { font-size: 10px; fill: #6e7681; }
+      .head { font-size: 13px; fill: #e6edf3; font-weight: 700; } .sub { font-size: 10.5px; fill: #6e7681; }
+      .q { font-size: 13px; fill: #e6edf3; } .a { font-size: 12px; fill: #c9d1d9; } .ok { fill: #3fb950; font-weight: 700; }
+      .rec { animation: rec 1s steps(1) infinite; }
+      .sec { animation: sec 10s steps(10) infinite; }
+      .type { transform-box: fill-box; transform-origin: left; animation: type 10s steps(52) infinite; }
+      .sweep { animation: sweep 10s linear infinite; }
+      .ring { transform-box: fill-box; transform-origin: center; animation: ring 10s ease-out infinite; }
+      .ans { animation: ans 10s ease-out infinite; }
+      .gate { stroke-dasharray: 6 4; animation: gate 10s linear infinite; }
+      .track { stroke-dasharray: 3 5; animation: march 1.2s linear infinite, trackin 10s linear infinite; }
+      .walk1 { animation: walk1 10s linear infinite; } .walk2 { animation: walk2 10s linear infinite; }
+      .car { animation: car 10s cubic-bezier(.3,.7,.3,1) infinite; }
+      .status { animation: status 10s steps(1) infinite; }
+      @keyframes rec { 50% { opacity: 0; } }
+      @keyframes sec { from { transform: translateY(0); } to { transform: translateY(-120px); } }
+      @keyframes type { 0% { transform: scaleX(0); } 28%, 100% { transform: scaleX(1); } }
+      @keyframes sweep { 0%, 30% { transform: translateY(0); opacity: 0; } 31% { opacity: .9; } 44% { transform: translateY(230px); opacity: .9; } 45%, 100% { transform: translateY(230px); opacity: 0; } }
+      @keyframes ring { 0%, 45% { transform: scale(2.4); opacity: 0; } 50% { transform: scale(1); opacity: 1; } 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+      @keyframes ans { 0%, 50% { opacity: 0; transform: translateY(6px); } 56%, 93% { opacity: 1; transform: translateY(0); } 98%, 100% { opacity: 0; } }
+      @keyframes gate { 0%, 48% { stroke-opacity: 0; } 52%, 93% { stroke-opacity: 1; stroke-dashoffset: 0; } 94%, 100% { stroke-opacity: 0; } }
+      @keyframes march { to { stroke-dashoffset: -16; } }
+      @keyframes trackin { 0%, 55% { stroke-opacity: 0; } 62%, 93% { stroke-opacity: .9; } 98%, 100% { stroke-opacity: 0; } }
+      @keyframes walk1 { 0% { transform: translateX(0); opacity: 1; } 55% { transform: translateX(150px); opacity: 1; } 56%, 100% { transform: translateX(150px); opacity: 0; } }
+      @keyframes walk2 { 0%, 58% { transform: translateX(0); opacity: 0; } 59% { opacity: 1; } 100% { transform: translateX(120px); opacity: 1; } }
+      @keyframes car { 0% { transform: translateX(-120px); } 22%, 100% { transform: translateX(0); } }
+      @keyframes status { 0%, 30% { opacity: 0; } 31%, 44% { opacity: 1; } 45%, 100% { opacity: 0; } }
+    </style>
+    <pattern id="evScan" width="3" height="3" patternUnits="userSpaceOnUse"><rect width="3" height="1" fill="#000" opacity=".28"/></pattern>
+    <clipPath id="c1"><rect x="24" y="62" width="200" height="105" rx="4"/></clipPath>
+    <clipPath id="c2"><rect x="234" y="62" width="200" height="105" rx="4"/></clipPath>
+    <clipPath id="c4"><rect x="234" y="177" width="200" height="105" rx="4"/></clipPath>
+    <clipPath id="qclip"><rect class="type" x="492" y="78" width="384" height="40"/></clipPath>
+    <clipPath id="secclip"><rect x="0" y="-10" width="70" height="12"/></clipPath>
+    <clipPath id="grid"><rect x="24" y="62" width="410" height="220" rx="4"/></clipPath>
+    <linearGradient id="sw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#58a6ff" stop-opacity="0"/><stop offset="1" stop-color="#58a6ff" stop-opacity=".45"/></linearGradient>
+  </defs>
+
+  <rect x="1" y="1" width="898" height="298" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <text x="24" y="30" class="head">evora — ask the cameras, get the clip</text>
+  <text x="24" y="46" class="sub">indexed once · answered with camera, time, a circled frame, and the reasons</text>
+
+  <!-- CAM 1: main gate, a red car rolls up to the gate -->
+  <g clip-path="url(#c1)">
+    <rect x="24" y="62" width="200" height="105" fill="#0b1220"/>
+    <path d="M24,150 L224,128" stroke="#21262d" stroke-width="16"/>
+    <rect x="150" y="96" width="5" height="44" fill="#30363d"/><rect x="196" y="92" width="5" height="44" fill="#30363d"/>
+    <rect x="150" y="96" width="51" height="4" fill="#30363d"/>
+    <g class="car">
+      <rect x="98" y="122" width="44" height="13" rx="3" fill="#f85149"/>
+      <rect x="106" y="114" width="26" height="10" rx="3" fill="#da3633"/>
+      <rect x="110" y="116" width="8" height="6" fill="#0b1220" opacity=".7"/><rect x="121" y="116" width="8" height="6" fill="#0b1220" opacity=".7"/>
+      <circle cx="108" cy="136" r="4" fill="#0d1117"/><circle cx="133" cy="136" r="4" fill="#0d1117"/>
+    </g>
+    <line x1="146" y1="146" x2="206" y2="138" stroke="#d29922" stroke-width="2.5" class="gate"/>
+    <rect x="24" y="62" width="200" height="105" fill="url(#evScan)"/>
+  </g>
+  <!-- CAM 2: a person in a brown shirt walks out of frame -->
+  <g clip-path="url(#c2)">
+    <rect x="234" y="62" width="200" height="105" fill="#0b1220"/>
+    <rect x="234" y="140" width="200" height="27" fill="#111827"/>
+    <rect x="370" y="78" width="50" height="62" fill="#161b22" stroke="#21262d"/>
+    <g class="walk1">
+      <circle cx="262" cy="112" r="5" fill="#8b949e" opacity=".55"/>
+      <rect x="256" y="118" width="12" height="16" rx="3" fill="#8b5a2b"/><rect x="257" y="134" width="4" height="10" fill="#30363d"/><rect x="263" y="134" width="4" height="10" fill="#30363d"/>
+    </g>
+    <rect x="234" y="62" width="200" height="105" fill="url(#evScan)"/>
+  </g>
+  <!-- CAM 3: a room with chairs -->
+  <rect x="24" y="177" width="200" height="105" rx="4" fill="#0b1220"/>
+  <g fill="#30363d"><rect x="50" y="236" width="16" height="16"/><rect x="50" y="222" width="4" height="16"/><rect x="88" y="236" width="16" height="16"/><rect x="88" y="222" width="4" height="16"/><rect x="126" y="236" width="16" height="16"/><rect x="126" y="222" width="4" height="16"/><rect x="164" y="236" width="16" height="16"/><rect x="164" y="222" width="4" height="16"/></g>
+  <rect x="24" y="177" width="200" height="105" fill="url(#evScan)"/>
+  <!-- CAM 4: corridor, the same person walks in -->
+  <g clip-path="url(#c4)">
+    <rect x="234" y="177" width="200" height="105" fill="#0b1220"/>
+    <path d="M234,282 L300,215 L368,215 L434,282 Z" fill="#111827"/>
+    <g class="walk2">
+      <circle cx="262" cy="228" r="5" fill="#8b949e" opacity=".55"/>
+      <rect x="256" y="234" width="12" height="16" rx="3" fill="#8b5a2b"/><rect x="257" y="250" width="4" height="10" fill="#30363d"/><rect x="263" y="250" width="4" height="10" fill="#30363d"/>
+    </g>
+    <rect x="234" y="177" width="200" height="105" fill="url(#evScan)"/>
+  </g>
+
+  <!-- tile chrome: labels, REC, ticking clocks -->
+  <g>
+    <rect x="24" y="62" width="200" height="105" rx="4" fill="none" stroke="#30363d"/>
+    <rect x="234" y="62" width="200" height="105" rx="4" fill="none" stroke="#30363d"/>
+    <rect x="24" y="177" width="200" height="105" rx="4" fill="none" stroke="#30363d"/>
+    <rect x="234" y="177" width="200" height="105" rx="4" fill="none" stroke="#30363d"/>
+    <text x="32" y="76" class="lab">CAM 1 · main gate</text><text x="242" y="76" class="lab">CAM 2 · lobby</text>
+    <text x="32" y="191" class="lab">CAM 3 · room</text><text x="242" y="191" class="lab">CAM 4 · corridor</text>
+    <g class="rec"><circle cx="212" cy="72" r="3.5" fill="#f85149"/><circle cx="422" cy="72" r="3.5" fill="#f85149"/><circle cx="212" cy="187" r="3.5" fill="#f85149"/><circle cx="422" cy="187" r="3.5" fill="#f85149"/></g>
+    <g fill="#6e7681" font-size="10">
+      <g transform="translate(32 160)"><g clip-path="url(#secclip)"><g class="sec" style="animation-delay:0s"><text y="0">14:32:00</text><text y="12">14:32:01</text><text y="24">14:32:02</text><text y="36">14:32:03</text><text y="48">14:32:04</text><text y="60">14:32:05</text><text y="72">14:32:06</text><text y="84">14:32:07</text><text y="96">14:32:08</text><text y="108">14:32:09</text><text y="120">14:32:00</text></g></g></g>
+      <g transform="translate(242 160)"><g clip-path="url(#secclip)"><g class="sec" style="animation-delay:-3s"><text y="0">14:32:10</text><text y="12">14:32:11</text><text y="24">14:32:12</text><text y="36">14:32:13</text><text y="48">14:32:14</text><text y="60">14:32:15</text><text y="72">14:32:16</text><text y="84">14:32:17</text><text y="96">14:32:18</text><text y="108">14:32:19</text><text y="120">14:32:10</text></g></g></g>
+      <g transform="translate(32 275)"><g clip-path="url(#secclip)"><g class="sec" style="animation-delay:-6s"><text y="0">14:32:30</text><text y="12">14:32:31</text><text y="24">14:32:32</text><text y="36">14:32:33</text><text y="48">14:32:34</text><text y="60">14:32:35</text><text y="72">14:32:36</text><text y="84">14:32:37</text><text y="96">14:32:38</text><text y="108">14:32:39</text><text y="120">14:32:30</text></g></g></g>
+      <g transform="translate(242 275)"><g clip-path="url(#secclip)"><g class="sec" style="animation-delay:-8s"><text y="0">14:33:00</text><text y="12">14:33:01</text><text y="24">14:33:02</text><text y="36">14:33:03</text><text y="48">14:33:04</text><text y="60">14:33:05</text><text y="72">14:33:06</text><text y="84">14:33:07</text><text y="96">14:33:08</text><text y="108">14:33:09</text><text y="120">14:33:00</text></g></g></g>
+    </g>
+  </g>
+
+  <!-- the scan, the hit, and the cross-camera track -->
+  <g clip-path="url(#grid)"><rect class="sweep" x="24" y="40" width="410" height="22" fill="url(#sw)"/></g>
+  <circle class="ring" cx="120" cy="127" r="30" fill="none" stroke="#f2cc60" stroke-width="2.5"/>
+  <path class="track" d="M410,128 C450,150 450,200 262,242" fill="none" stroke="#a5b4fc" stroke-width="2"/>
+
+  <!-- the question and the answer -->
+  <rect x="460" y="62" width="416" height="220" rx="6" fill="#0b1220" stroke="#30363d"/>
+  <text x="476" y="84" class="dim">ASK</text>
+  <g clip-path="url(#qclip)">
+    <text x="492" y="102" class="q">did a red car pass the main gate in the last hour?</text>
+  </g>
+  <text x="476" y="102" class="q rec" fill="#58a6ff">›</text>
+  <text x="476" y="130" class="dim status">searching 4 cameras · plan → evidence …</text>
+
+  <g class="ans">
+    <text x="476" y="134" class="a"><tspan class="ok">FOUND</tspan> · CAM 1 main gate · 14:32:07</text>
+    <rect x="476" y="146" width="128" height="72" rx="4" fill="#161b22" stroke="#30363d"/>
+    <rect x="496" y="180" width="44" height="13" rx="3" fill="#f85149"/><rect x="504" y="172" width="26" height="10" rx="3" fill="#da3633"/>
+    <circle cx="518" cy="183" r="24" fill="none" stroke="#f2cc60" stroke-width="2"/>
+    <path d="M582,198 l10,6 l-10,6 z" fill="#e6edf3"/>
+    <text x="618" y="160" class="a">reasons</text>
+    <text x="618" y="178" class="dim">· vehicle, red hue on the body</text>
+    <text x="618" y="194" class="dim">· crossed the gate line you drew once</text>
+    <text x="618" y="210" class="dim">· second visual check agrees</text>
+    <text x="476" y="240" class="dim">clip ▶ 0:06 · evidence pack signed (Ed25519)</text>
+  </g>
+
+  <rect x="476" y="252" width="252" height="20" rx="10" fill="#0f2a17" stroke="#3fb950" stroke-opacity=".6"/>
+  <text x="488" y="266" class="lab" fill="#3fb950">LOCAL ONLY · faces blurred</text>
+  <text x="742" y="266" class="dim">illustrative run</text>
+</svg>
