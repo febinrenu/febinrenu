@@ -23,6 +23,8 @@ import kit
 from palette import THEMES
 
 LOGIN = "febinrenu"
+RES = "LANGUAGE RESERVE · BYTES ACROSS PUBLIC REPOSITORIES"
+SNAP = "A SNAPSHOT, REDRAWN WEEKLY BY A GITHUB ACTION · NOT LIVE"
 W, H = 1200, 600
 f = G.n
 
@@ -93,8 +95,8 @@ def build(p: dict, s: dict) -> str:
 
     style = (f".hand{{transform-origin:{cx}px {f(cy)}px;animation:hand 36s linear infinite}}"
              "@keyframes hand{to{transform:rotate(360deg)}}"
-             ".rise{opacity:0;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) forwards}"
-             "@keyframes rise{from{opacity:0}to{opacity:1}}"
+             ".rise{animation:rise 1.2s cubic-bezier(.2,.7,.2,1) both}"
+             "@keyframes rise{from{opacity:.35}to{opacity:1}}"
              ".lume{animation:lume 4s ease-in-out infinite}@keyframes lume{0%,100%{opacity:.4}50%{opacity:1}}")
     defs = (f'<radialGradient id="{uid}vig" cx=".3" cy=".5" r=".8"><stop offset="0" stop-color="{p["case_hi"]}"/>'
             f'<stop offset="1" stop-color="{p["case"]}"/></radialGradient>')
@@ -152,7 +154,7 @@ def build(p: dict, s: dict) -> str:
     y = 128
     for k, v in figures:
         body += (kit.txt(k, "martian-light", 8, x0, y, p["ink_faint"] if dark else p["ink_dim"], 0.26)
-                 + kit.txt(v, "bodoni-text", 17, x0 + 140, y + 1, p["ink"])
+                 + kit.txt(v, "bodoni-text", 17, x0 + 168, y + 1, p["ink"])
                  + f'<path d="M{x0},{y + 11}H{W - 64}" stroke="{p["steel_faint"]}" stroke-width=".6"/>')
         y += 32
     # language reserve: one arc, segmented by bytes
@@ -167,7 +169,7 @@ def build(p: dict, s: dict) -> str:
     ax, ay, ar = x0 + 120, 470, 104
     a0, a1 = math.radians(180), math.radians(360)
     acc = a0
-    body += (kit.txt("LANGUAGE RESERVE · BYTES ACROSS PUBLIC REPOSITORIES", "martian-light", 8, x0, 300, p["ink_dim"], 0.26)
+    body += (kit.txt(RES, "martian-light", kit.fit(RES, "martian-light", 8, W - 64 - x0, 0.26), x0, 300, p["ink_dim"], 0.26)
              + f'<path d="M{x0},{311}H{W - 64}" stroke="{p["steel_faint"]}" stroke-width=".6"/>')
     ly = 340
     for i, (name, v) in enumerate(top):
@@ -184,7 +186,7 @@ def build(p: dict, s: dict) -> str:
     body += (f'<path d="{G.ticks(ax, ay, ar + 14, 5, 40, .5)}" stroke="{p["steel_dim"]}" stroke-width=".5" '
              f'clip-path="url(#{uid}half)"/>')
     defs += f'<clipPath id="{uid}half"><rect x="{ax - ar - 30}" y="{ay - ar - 30}" width="{2 * ar + 60}" height="{ar + 30}"/></clipPath>'
-    body += (kit.txt("A SNAPSHOT, REDRAWN WEEKLY BY A GITHUB ACTION · NOT LIVE", "martian-light", 7.4, x0, H - 40,
+    body += (kit.txt(SNAP, "martian-light", kit.fit(SNAP, "martian-light", 7.4, W - 64 - x0, 0.24), x0, H - 40,
                      p["ink_faint"] if dark else p["ink_dim"], 0.24)
              + f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="18" fill="none" stroke="{p["steel_faint"]}"/>')
     langs_desc = ", ".join(f"{n} {100 * v / total:.1f}%" for n, v in top)

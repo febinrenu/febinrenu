@@ -34,8 +34,8 @@ def build(p: dict, key: str, numeral: str, title: str, caption: str) -> str:
              ".spin2{animation:spin2 60s linear infinite}@keyframes spin2{to{transform:rotate(-360deg)}}"
              f".spin,.spin2{{transform-origin:{cx}px {cy}px}}"
              ".lume{animation:lume 5s ease-in-out infinite}@keyframes lume{0%,100%{opacity:.3}50%{opacity:1}}"
-             ".rule{stroke-dasharray:1;stroke-dashoffset:1;animation:rule 1.8s cubic-bezier(.6,0,.2,1) .2s forwards}"
-             "@keyframes rule{to{stroke-dashoffset:0}}")
+             ".rule{stroke-dasharray:1;animation:rule 1.8s cubic-bezier(.6,0,.2,1) .2s both}"
+             "@keyframes rule{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}")
     body = (
         f'<circle cx="{cx}" cy="{cy}" r="38" fill="none" stroke="{p["steel_dim"]}" stroke-width=".6"/>'
         f'<path d="{G.ticks(cx, cy, 38, 3, 60, .5)}" stroke="{p["steel_dim"]}" stroke-width=".5"/>'
@@ -45,7 +45,7 @@ def build(p: dict, key: str, numeral: str, title: str, caption: str) -> str:
         + kit.txt(title, "bodoni-display", 40, title_x, 84, p["ink"], 0.01)
         + f'<path class="rule" pathLength="1" d="M{line_x0:.0f},{cy + 8}H{W - 8}" stroke="{p["steel_dim"]}" stroke-width=".8"/>'
         + f'<path d="M{W - 8},{cy + 3}v10" stroke="{p["steel"]}" stroke-width="1"/>'
-        + kit.txt(caption, "martian-light", 9, W - 8, cy + 30, p["ink_dim"], 0.26, "end")
+        + kit.txt(caption, "martian-light", kit.fit(caption, "martian-light", 9, W - line_x0 - 20, 0.26), W - 14, cy + 30, p["ink_dim"], 0.26, "end")
     )
     desc = f"Section {numeral}: {title}. {caption.capitalize()}."
     return kit.doc(W, H, f"{numeral}. {title}", desc, style, r1_defs + r2_defs, body, uid)

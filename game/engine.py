@@ -268,7 +268,7 @@ def render_card(s: dict, p: dict) -> str:
         x = 64 + (i % 2) * 300
         y = 262 + (i // 2) * 34
         body += (t(k, "martian-light", 7.8, x, y, p["ink_faint"] if dark else p["ink_dim"], 0.26)
-                 + t(v, "bodoni-text", 17, x + 150, y + 1, p["ink"])
+                 + t(v, "bodoni-text", 17, x + 186, y + 1, p["ink"])
                  + f'<path d="M{x},{y + 11}H{x + 270}" stroke="{p["steel_faint"]}" stroke-width=".6"/>')
     body += (f'<rect x="64" y="{H - 82}" width="576" height="50" rx="10" fill="none" stroke="{p["lume"]}" '
              f'stroke-opacity=".55"/>'

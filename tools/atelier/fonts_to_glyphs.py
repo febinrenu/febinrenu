@@ -26,12 +26,12 @@ CHARS = [chr(c) for c in range(32, 127)] + list("·—–×→‘’“”…°�
 
 # name: (file, axis location)
 STYLES = {
-    "bodoni-display": ("BodoniModa.ttf", {"wght": 400, "opsz": 96}),
-    "bodoni-display-italic": ("BodoniModa-Italic.ttf", {"wght": 400, "opsz": 96}),
-    "bodoni-text": ("BodoniModa.ttf", {"wght": 400, "opsz": 18}),
-    "bodoni-text-italic": ("BodoniModa-Italic.ttf", {"wght": 400, "opsz": 18}),
-    "martian": ("MartianMono.ttf", {"wght": 380, "wdth": 112.5}),
-    "martian-light": ("MartianMono.ttf", {"wght": 250, "wdth": 112.5}),
+    "bodoni-display": ("BodoniModa.ttf", {"wght": 430, "opsz": 30}),
+    "bodoni-display-italic": ("BodoniModa-Italic.ttf", {"wght": 430, "opsz": 30}),
+    "bodoni-text": ("BodoniModa.ttf", {"wght": 450, "opsz": 14}),
+    "bodoni-text-italic": ("BodoniModa-Italic.ttf", {"wght": 450, "opsz": 14}),
+    "martian": ("MartianMono.ttf", {"wght": 440, "wdth": 112.5}),
+    "martian-light": ("MartianMono.ttf", {"wght": 330, "wdth": 112.5}),
     "martian-bold": ("MartianMono.ttf", {"wght": 600, "wdth": 112.5}),
 }
 

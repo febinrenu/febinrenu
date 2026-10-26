@@ -98,12 +98,12 @@ def build(p: dict) -> str:
         + ".g1{animation:g1 240s linear infinite}@keyframes g1{to{transform:rotate(360deg)}}"
           ".g2{animation:g2 300s linear infinite}@keyframes g2{to{transform:rotate(-360deg)}}"
         + ".sweep{animation:sweep 9s cubic-bezier(.5,0,.3,1) infinite}"
-          "@keyframes sweep{0%,62%{transform:translateX(-260px)}86%,100%{transform:translateX(760px)}}"
+          "@keyframes sweep{0%,62%{transform:translateX(0)}86%,100%{transform:translateX(1020px)}}"
         + ".lume{animation:lume 6s ease-in-out infinite}@keyframes lume{0%,100%{opacity:.45}50%{opacity:1}}"
-        + ".rise{opacity:0;animation:rise 1.4s cubic-bezier(.2,.7,.2,1) forwards}"
-          "@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}"
-        + ".draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s cubic-bezier(.6,0,.2,1) .3s forwards}"
-          "@keyframes draw{to{stroke-dashoffset:0}}"
+        + ".rise{animation:rise 1.4s cubic-bezier(.2,.7,.2,1) both}"
+          "@keyframes rise{from{transform:translateY(8px)}to{transform:none}}"
+        + ".draw{stroke-dasharray:1;animation:draw 2.4s cubic-bezier(.6,0,.2,1) .3s both}"
+          "@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}"
     )
 
     def origin(pt):
@@ -235,7 +235,7 @@ def build(p: dict) -> str:
     mid = ((Bb[0] + tip[0]) / 2 - 4, (Bb[1] + tip[1]) / 2)
     tilt = math.degrees(math.atan2(Bb[1] - tip[1], Bb[0] - tip[0]))
     eng = (f'<g transform="rotate({f(tilt)} {f(mid[0])} {f(mid[1])})">'
-           + kit.txt("FKR·26 · MMXXVI", "martian-light", 6.4, mid[0], mid[1] + 2.3, p["ink_dim"], 0.3, "middle")
+           + kit.txt("FKR·26 · MMXXVI", "martian-light", 4.6, mid[0], mid[1] + 2.3, p["ink_dim"], 0.3, "middle")
            + "</g>")
 
     # bezel: polished ring and a railway minute track, with lume at the cardinal points
@@ -283,7 +283,7 @@ def build(p: dict) -> str:
         y = 392 + i * 25
         spec += (f'<g class="rise" style="animation-delay:{0.7 + i * 0.12:.2f}s">'
                  + kit.txt(k, "martian-light", 8.6, 64, y, faint if dark else dim, 0.28)
-                 + kit.txt(v, "bodoni-text", 15, 168, y + 1, ink)
+                 + kit.txt(v, "bodoni-text", 15, 196, y + 1, ink)
                  + f'<path d="M64,{y + 9}H600" stroke="{p["steel_faint"]}" stroke-width=".6"/></g>')
 
     head = (
@@ -293,7 +293,7 @@ def build(p: dict) -> str:
         + "</g>"
         + f'<path class="draw" pathLength="1" d="M64,160H600" stroke="{p["steel_dim"]}" stroke-width=".8"/>'
         + f'<g class="rise" style="animation-delay:.35s"><path d="{name_d}" fill="{ink}"/>'
-        + f'<g clip-path="url(#{uid}name)"><rect class="sweep" x="0" y="150" width="200" height="110" '
+        + f'<g clip-path="url(#{uid}name)"><rect class="sweep" x="-260" y="150" width="200" height="110" '
           f'fill="url(#{uid}glint)" opacity="{".55" if dark else ".9"}"/></g></g>'
         + f'<g class="rise" style="animation-delay:.55s">'
         + kit.txt("and show their work.", "bodoni-display-italic", 30, 64, 330, p["salmon"])

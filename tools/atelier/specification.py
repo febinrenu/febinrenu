@@ -33,8 +33,8 @@ def build(p: dict) -> str:
     block_tops = [top, top + 70 + rows_per[0] * ROW_H + 30]
     H = block_tops[1] + 70 + rows_per[1] * ROW_H + 40
     total = sum(len(items) for _, items in REGISTERS)
-    style = (".rise{opacity:0;animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards}"
-             "@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}"
+    style = (".rise{animation:rise 1s cubic-bezier(.2,.7,.2,1) both}"
+             "@keyframes rise{from{transform:translateY(6px)}to{transform:none}}"
              ".lume{animation:lume 8s ease-in-out infinite;opacity:.25}"
              "@keyframes lume{0%,100%{opacity:.25}6%,14%{opacity:1}22%{opacity:.25}}")
     body = (kit.txt("MOVEMENT SPECIFICATION", "martian", 10, X0, 52, p["salmon"], 0.34)

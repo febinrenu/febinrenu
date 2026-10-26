@@ -30,8 +30,8 @@ def build(p: dict) -> str:
     style = (f".rotor{{transform-origin:{cx}px {f(cy)}px;animation:rotor 14s cubic-bezier(.45,0,.4,1) infinite}}"
              "@keyframes rotor{0%{transform:rotate(-40deg)}22%{transform:rotate(130deg)}40%{transform:rotate(70deg)}"
              "68%{transform:rotate(220deg)}84%{transform:rotate(190deg)}100%{transform:rotate(320deg)}}"
-             ".rise{opacity:0;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) forwards}"
-             "@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}")
+             ".rise{animation:rise 1.2s cubic-bezier(.2,.7,.2,1) both}"
+             "@keyframes rise{from{transform:translateY(6px)}to{transform:none}}")
     # the rotor: a half disc with a heavy rim, striped, engraved
     rotor_d = (f"M{f(cx - R + 6)},{f(cy)}A{f(R - 6)},{f(R - 6)} 0 0 1 {f(cx + R - 6)},{f(cy)}"
                f"L{f(cx + 20)},{f(cy)}A20,20 0 0 0 {f(cx - 20)},{f(cy)}Z")

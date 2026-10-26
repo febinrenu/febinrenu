@@ -34,16 +34,16 @@ def frame(p: dict, uid: str, side: str, no: int, ref: str, title: str, tagline: 
             + f'<path d="M{x0},{86}H{x1}" stroke="{p["steel_dim"]}" stroke-width=".7"/>'
             + kit.txt(title, "bodoni-display", 60, x0 - 3, 160, ink, 0.0)
             + kit.txt(tagline, "bodoni-display-italic", 23, x0, 198, p["salmon"] if dark else p["copper"])
-            + kit.txt(mech_name, "martian-light", 8.6, x0, 232, dim, 0.3))
+            + kit.txt(mech_name, "martian-light", kit.fit(mech_name, "martian-light", 8.6, 460, 0.3), x0, 232, dim, 0.3))
     y = 276
     for k, v in rows:
         body += (kit.txt(k, "martian-light", 8, x0, y, faint if dark else dim, 0.26)
-                 + kit.txt(v, "bodoni-text", 15.5, x0 + 132, y + 1, ink)
+                 + kit.txt(v, "bodoni-text", kit.fit(v, "bodoni-text", 15.5, 312), x0 + 148, y + 1, ink)
                  + f'<path d="M{x0},{y + 10}H{x1}" stroke="{p["steel_faint"]}" stroke-width=".6"/>')
         y += 28
     sx = x0
     if note:
-        body += kit.txt(note, "martian-light", 7.6, x0, H - 34, faint if dark else dim, 0.24)
+        body += kit.txt(note, "martian-light", kit.fit(note, "martian-light", 7.6, 460, 0.24), x0, H - 34, faint if dark else dim, 0.24)
     for s in status:
         live = s.startswith("LIVE")
         if live:
@@ -455,14 +455,15 @@ def prism(p):
             mech += f'<circle class="hl" cx="{f(gx)}" cy="{f(gy)}" r="{gr + 5}" fill="none" stroke="{p["lume"]}" stroke-width="1.2"/>'
     # the trace, from the diverging gauges back to the words
     g6 = x0 + gap * 5.5
-    style += ".tr{stroke-dasharray:420;stroke-dashoffset:420;animation:tr 12s ease-in-out infinite}@keyframes tr{0%,52%{stroke-dashoffset:420}68%,92%{stroke-dashoffset:0;opacity:1}100%{opacity:0;stroke-dashoffset:0}}"
+    style += ".tr{stroke-dasharray:420;animation:tr 12s ease-in-out infinite}@keyframes tr{0%,52%{stroke-dashoffset:420}68%,92%{stroke-dashoffset:0;opacity:1}100%{opacity:0;stroke-dashoffset:0}}"
     mech += (f'<path class="tr" d="M{f(g6)},{f(cy + 60)}C{f(g6)},{f(cy + 140)} {f(x1 + 10)},{f(cy + 130)} {f(x1 + 10)},{f(cy - 60)}'
              f'S{f(hl_x + hl_w + 30)},{f(cy - 120)} {f(hl_x + hl_w / 2)},{f(cy - 128)}" fill="none" stroke="{p["copper"]}" stroke-width="1.2"/>')
     mech += (kit.txt("EFFECTIVE RATE BY INCOME DECILE", "martian-light", 7.4, x0, cy + 92, p["ink_dim"], 0.24)
              + f'<circle cx="{f(x0 + 4)}" cy="{f(cy + 108)}" r="3" fill="{blued(p)}"/>'
              + kit.txt("EXPERT CODING", "martian-light", 7.4, x0 + 14, cy + 111, p["ink_dim"], 0.22)
-             + f'<circle cx="{f(x0 + 134)}" cy="{f(cy + 108)}" r="3" fill="{p["copper"]}"/>'
-             + kit.txt("LLM EXTRACTION", "martian-light", 7.4, x0 + 144, cy + 111, p["ink_dim"], 0.22)
+             + f'<circle cx="{f(x0 + 40 + kit.width("EXPERT CODING", "martian-light", 7.4, 0.22))}" cy="{f(cy + 108)}" r="3" fill="{p["copper"]}"/>'
+             + kit.txt("LLM EXTRACTION", "martian-light", 7.4, x0 + 50 + kit.width("EXPERT CODING", "martian-light", 7.4, 0.22),
+                       cy + 111, p["ink_dim"], 0.22)
              + f'<g class="hl">' + kit.txt("DECILES 5–7 DIVERGE → “₹25,000”", "martian", 7.6, x0, cy + 134, p["copper"], 0.24)
              + "</g>")
     body += mech
