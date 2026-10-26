@@ -1,13 +1,30 @@
 {
-  "case": 2,
+  "case": 3,
   "humans": 0.0,
-  "model": 0.0,
+  "model": 4678.0,
   "rounds": {
     "won": 0,
     "tied": 0,
-    "lost": 0
+    "lost": 1
   },
-  "moves": [],
-  "players": {},
-  "updated": null
+  "moves": [
+    {
+      "case": 2,
+      "user": "febinrenu",
+      "action": "leave",
+      "model_action": "escalate",
+      "human_ev": 0,
+      "model_ev": 4678,
+      "p_true": 0.65,
+      "p_model": 0.28
+    }
+  ],
+  "players": {
+    "febinrenu": {
+      "edge": -4678,
+      "moves": 1,
+      "won": 0
+    }
+  },
+  "updated": "2026-10-26 17:04 UTC"
 }

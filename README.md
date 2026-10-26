@@ -89,11 +89,21 @@ A game you can play right here. Reclaim's whole argument is that a calibrated mo
 The model sees every field on the card. **It can't read the note.** That's your edge, if you use it. Press a plaque and an issue opens with your move filled in. Hit **Create**, and within about a minute a bot scores you against the model, updates this board and deals the next case.
 
 <!-- GAME:START -->
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/calibre/wager/case-dark.svg?v=2"/><img src="assets/calibre/wager/case-light.svg?v=2" width="100%" alt="Case 2: ₹8,850 failed payment, do not honor, 0 prior retries, customer for 31 months, 0 past payments ok, via UPI. Note: updated their card in the profile yesterday. Humans ±₹0, model ±₹0."/></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/calibre/wager/case-dark.svg?v=3"/><img src="assets/calibre/wager/case-light.svg?v=3" width="100%" alt="Case 3: ₹500 failed payment, network error, 1 prior retry, customer for 8 months, 7 past payments ok, via card. Note: updated their card in the profile yesterday. Humans ±₹0, model +₹4,678."/></picture>
 
-<p align="center"><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Crecover%7C2&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><picture><source media="(prefers-color-scheme: dark)" srcset="assets/calibre/wager/plaque-recover-dark.svg"/><img src="assets/calibre/wager/plaque-recover-light.svg" width="32%" alt="RECOVER"/></picture></a><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Cescalate%7C2&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><picture><source media="(prefers-color-scheme: dark)" srcset="assets/calibre/wager/plaque-escalate-dark.svg"/><img src="assets/calibre/wager/plaque-escalate-light.svg" width="32%" alt="ESCALATE"/></picture></a><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Cleave%7C2&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><picture><source media="(prefers-color-scheme: dark)" srcset="assets/calibre/wager/plaque-leave-dark.svg"/><img src="assets/calibre/wager/plaque-leave-light.svg" width="32%" alt="LEAVE IT"/></picture></a></p>
+<p align="center"><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Crecover%7C3&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><picture><source media="(prefers-color-scheme: dark)" srcset="assets/calibre/wager/plaque-recover-dark.svg"/><img src="assets/calibre/wager/plaque-recover-light.svg" width="32%" alt="RECOVER"/></picture></a><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Cescalate%7C3&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><picture><source media="(prefers-color-scheme: dark)" srcset="assets/calibre/wager/plaque-escalate-dark.svg"/><img src="assets/calibre/wager/plaque-escalate-light.svg" width="32%" alt="ESCALATE"/></picture></a><a href="https://github.com/febinrenu/febinrenu/issues/new?title=reclaim%7Cleave%7C3&body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%20A%20bot%20scores%20your%20call%20against%20the%20model%20in%20about%20a%20minute%2C%20comments%20with%20the%20result%20and%20closes%20this."><picture><source media="(prefers-color-scheme: dark)" srcset="assets/calibre/wager/plaque-leave-dark.svg"/><img src="assets/calibre/wager/plaque-leave-light.svg" width="32%" alt="LEAVE IT"/></picture></a></p>
 
-<p align="center"><sub>No moves yet. The first visitor sets the scoreboard.</sub></p>
+| case | player | their call | model's call | edge |
+|---|---|---|---|---|
+| N° 2 | @febinrenu | LEAVE IT | ESCALATE | −₹4,678 |
+
+<details><summary><b>Leaderboard</b>: total edge over the model</summary>
+
+| # | player | edge | moves | wins |
+|---|---|---|---|---|
+| 1 | @febinrenu | −₹4,678 | 1 | 0 |
+
+</details>
 <!-- GAME:END -->
 
 <details>
