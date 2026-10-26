@@ -276,7 +276,8 @@ def render_card(s: dict, p: dict) -> str:
              + t(c["note"], "bodoni-text-italic", 16, 82, H - 42, p["ink"]))
     # the scoreboard
     x0 = 720
-    body += (t("HUMANS AGAINST THE MODEL · NET RECOVERED", "martian-light", 8.4, x0, 112, p["ink_dim"], 0.28)
+    head = "HUMANS AGAINST THE MODEL · NET RECOVERED"
+    body += (t(head, "martian-light", kit.fit(head, "martian-light", 8.4, 416, 0.28), x0, 112, p["ink_dim"], 0.28)
              + f'<path d="M{x0},124H{W - 64}" stroke="{p["steel_faint"]}" stroke-width=".6"/>')
     for i, (who, v, col) in enumerate((("Humans", h, p["salmon"] if dark else p["copper"]), ("The model", m, blue))):
         y = 170 + i * 70

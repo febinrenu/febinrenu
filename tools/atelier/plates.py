@@ -44,13 +44,17 @@ def frame(p: dict, uid: str, side: str, no: int, ref: str, title: str, tagline: 
     sx = x0
     if note:
         body += kit.txt(note, "martian-light", kit.fit(note, "martian-light", 7.6, 460, 0.24), x0, H - 34, faint if dark else dim, 0.24)
+    st_size = 8.6
+    total = sum(kit.width(s, "martian", st_size, 0.3) + 26 for s in status) + 14 - 26
+    if total > 460:
+        st_size *= 460 / total
     for s in status:
         live = s.startswith("LIVE")
         if live:
             body += f'<circle class="lume" cx="{sx + 4}" cy="{H - 66}" r="3.4" fill="{p["lume"]}"/>'
             sx += 14
-        body += kit.txt(s, "martian", 8.6, sx, H - 62.5, ink if live else dim, 0.3)
-        sx += kit.width(s, "martian", 8.6, 0.3) + 26
+        body += kit.txt(s, "martian", st_size, sx, H - 62.5, ink if live else dim, 0.3)
+        sx += kit.width(s, "martian", st_size, 0.3) + 26
     mech_cx = (W - 64 - 330) if side == "left" else (64 + 330)
     return body, defs, mech_cx
 
@@ -319,6 +323,9 @@ def reclaim(p):
 
 # --- IV. SCOPECOMPOSE: the differential ---------------------------------------------
 
+SEL = "A SELECTOR KEEPS ONE BRANCH. A DIFFERENTIAL KEEPS BOTH."
+
+
 def scopecompose(p):
     uid = f"sc{p['name'][0]}"
     dark = p["name"] == "dark"
@@ -330,7 +337,7 @@ def scopecompose(p):
          ("METRIC", "Suppression Rate measures the deletion"),
          ("STATUS", "pipeline built, 501 tests; no results yet")],
         ["SOURCE", "FINAL-YEAR RESEARCH · TWO MEMBERS"], "RESEARCH IN PROGRESS")
-    cx, cy = mx - 30, H / 2 + 10
+    cx, cy = mx - 92, H / 2 + 10
     m = 2.6
     Ns, Np, Nr = 24, 24, 72
     rs, rp, rr = m * Ns / 2, m * Np / 2, m * Nr / 2
@@ -387,7 +394,7 @@ def scopecompose(p):
              + kit.txt("RING · EXCEPTION", "martian-light", 7.4, lx + 16, out_y2 - 6, p["ink_dim"], 0.22)
              + kit.txt("waived for premium-tier", "bodoni-text-italic", 13.5, lx + 16, out_y2 + 12, p["ink"])
              + kit.txt("CARRIER · THE QUERY", "martian-light", 7.4, cx, cy + rr + 46, p["ink_dim"], 0.22, "middle")
-             + kit.txt("A SELECTOR KEEPS ONE BRANCH. A DIFFERENTIAL KEEPS BOTH.", "martian-light", 7.4, cx + 40,
+             + kit.txt(SEL, "martian-light", kit.fit(SEL, "martian-light", 7.4, 540, 0.22), mx,
                        cy - rr - 40, p["salmon"] if dark else p["copper"], 0.22, "middle"))
     body += mech
     desc = ("Plate four, ScopeCompose: a planetary differential. The carrier, the query, drives three planets; the sun "

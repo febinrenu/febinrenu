@@ -127,7 +127,7 @@ These are synthetic cases and a toy replica of Reclaim's decision logic, not its
 
 <br/>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/calibre/colophon-dark.svg"/><img src="assets/calibre/colophon-light.svg" width="100%" alt="Colophon: a caseback window with the winding rotor swinging. Every mark above is typeset code, drawn as SVG by Python that ships in this repository and set in Bodoni Moda and Martian Mono, outlined into paths."/></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/calibre/colophon-dark.svg"/><img src="assets/calibre/colophon-light.svg" width="100%" alt="Colophon: a caseback window with the winding rotor swinging. Every image above is typeset code, drawn as SVG by Python that ships in this repository and set in Bodoni Moda and Martian Mono, outlined into paths."/></picture>
 
 **SMAHI-ER**, IEEE IEHNS, June 2026: a multi-agent hypergraph framework for resilient human-machine manufacturing. [10.1109/IEHNS68708.2026.11607072](https://doi.org/10.1109/IEHNS68708.2026.11607072)<br/>
 First Rank, 9.54 SGPA (May 2024) · Second Rank, 9.42 SGPA (Dec 2023), Karunya Institute

@@ -55,7 +55,7 @@ def build(p: dict) -> str:
              "The ledger is redrawn weekly; the wager moves with every visitor."]
     text = (f'<g class="rise">' + kit.txt("COLOPHON", "martian", 9.5, x0, 78, p["salmon"], 0.34)
             + f'<path d="M{x0},92H{W - 64}" stroke="{p["steel_dim"]}" stroke-width=".7"/>'
-            + kit.txt("Every mark above is typeset code.", "bodoni-display-italic", 30, x0, 140, p["ink"]) + "</g>")
+            + kit.txt("Every image above is typeset code.", "bodoni-display-italic", 30, x0, 140, p["ink"]) + "</g>")
     for i, line in enumerate(lines):
         text += (f'<g class="rise" style="animation-delay:{0.3 + i * 0.15:.2f}s">'
                  + kit.txt(line, "bodoni-text", 15.5, x0, 182 + i * 27, p["ink_dim"]) + "</g>")
@@ -64,7 +64,7 @@ def build(p: dict) -> str:
              + kit.txt("FEBIN K RENU", "martian", 8.6, W - 64, H - 40, p["ink_dim"], 0.34, "end"))
     body = (f'<rect width="{W}" height="{H}" rx="18" fill="url(#{uid}vig)"/>{window}{text}'
             f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="18" fill="none" stroke="{p["steel_faint"]}"/>')
-    desc = ("Colophon: a caseback window with the winding rotor swinging. Every mark above is typeset code: drawn as "
+    desc = ("Colophon: a caseback window with the winding rotor swinging. Every image above is typeset code: drawn as "
             "SVG by Python that ships in this repository, set in Bodoni Moda and Martian Mono under the SIL Open Font "
             "License and outlined into paths. Figures come from each project's own README and illustrations say so. "
             "The ledger is redrawn weekly and the wager moves with every visitor. Calibre FKR-26, 2026, Hyderabad.")
