@@ -33,7 +33,7 @@ jobs:
             git fetch -q origin main
             git reset -q --hard origin/main
             python3 game/engine.py play --title "$TITLE" --user "$PLAYER" --comment-out "$RUNNER_TEMP/comment.md"
-            git add README.md game/state.json assets/game/case.svg
+            git add README.md game/state.json assets/calibre/wager
             if git diff --cached --quiet; then published=yes; break; fi
             git commit -q -m "game: @$PLAYER plays a case"
             if git push -q origin HEAD:main; then published=yes; break; fi

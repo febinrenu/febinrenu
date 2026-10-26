@@ -1,0 +1,37 @@
+name: ledger
+
+# Redraws the perpetual-calendar ledger from the GitHub API once a week.
+on:
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  redraw:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Redraw and publish
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # The wager may push at the same moment; rebuild on top of whatever landed.
+          for attempt in 1 2 3 4 5; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            python3 tools/atelier/ledger.py
+            git add assets/calibre/ledger-dark.svg assets/calibre/ledger-light.svg
+            if git diff --cached --quiet; then echo "nothing new"; break; fi
+            git commit -q -m "ledger: weekly redraw"
+            if git push -q origin HEAD:main; then break; fi
+            sleep $((attempt * 3))
+          done

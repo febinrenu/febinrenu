@@ -30,7 +30,8 @@ from urllib.parse import quote
 ROOT = Path(__file__).resolve().parent.parent
 STATE = ROOT / "game" / "state.json"
 README = ROOT / "README.md"
-CARD = ROOT / "assets" / "game" / "case.svg"
+WAGER = ROOT / "assets" / "calibre" / "wager"
+WAGER_URL = "assets/calibre/wager"
 REPO = "febinrenu/febinrenu"
 
 START, END = "<!-- GAME:START -->", "<!-- GAME:END -->"
@@ -221,104 +222,156 @@ def issue_url(action: str, n: int) -> str:
     return f"https://github.com/{REPO}/issues/new?title={quote(title, safe='')}&body={quote(body, safe='')}"
 
 
-def render_card(s: dict) -> str:
+def _themes():
+    sys.path.insert(0, str(ROOT / "tools" / "atelier"))
+    import kit  # noqa: E402  (stdlib-only typesetting shared with the rest of the profile)
+    from palette import THEMES  # noqa: E402
+    return kit, THEMES
+
+
+def render_card(s: dict, p: dict) -> str:
+    """The case as an engraved placard, in the profile's movement finish (dark or light)."""
+    kit, _ = _themes()
+    W, H = 1200, 420
+    dark = p["name"] == "dark"
+    uid = f"wg{p['name'][0]}"
     c = case(s["case"])
-    mono = "font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace"
     reason = c["reason"].replace("_", " ")
     h, m = s["humans"], s["model"]
     span = max(abs(h), abs(m), 1.0)
-    bar = lambda v: max(4.0, 250.0 * abs(v) / span)  # noqa: E731
     r = s["rounds"]
     last = s["moves"][0] if s["moves"] else None
     if last:
         d = last["human_ev"] - last["model_ev"]
-        last_line = (f"last: @{last['user']} chose {LABEL[last['action']]} on #{last['case']}, "
-                     f"model chose {LABEL[last['model_action']]} → humans {signed(d)}")
+        last_line = (f"LAST · @{last['user']} chose {LABEL[last['action']]} on N° {last['case']}, "
+                     f"the model {LABEL[last['model_action']]} · humans {signed(d)}")
     else:
-        last_line = "no moves yet: the first person to play sets the scoreboard"
-    fields = [("prior retries", str(c["attempts"])), ("customer for", f"{c['tenure']} mo"),
-              ("past payments ok", str(c["past_paid"])), ("channel", c["channel"])]
-    rows = "".join(
-        f'<text x="{36 + (i % 2) * 210}" y="{168 + (i // 2) * 40}" class="k">{esc(k)}</text>'
-        f'<text x="{36 + (i % 2) * 210}" y="{186 + (i // 2) * 40}" class="v">{esc(v)}</text>'
-        for i, (k, v) in enumerate(fields))
-    return f"""<svg width="900" height="330" viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d">
-  <title id="t">Out-decide my model, case {c['n']}</title>
-  <desc id="d">Case {c['n']}: a failed payment of {rupees(c['amount'])}, reason {reason}, {retries(c['attempts'])}, customer for {c['tenure']} months, {c['past_paid']} past payments succeeded, paid by {c['channel']}. Note on file: {esc(c['note'])}. Scoreboard: humans {signed(h)}, model {signed(m)}, rounds won {r['won']}, tied {r['tied']}, lost {r['lost']}.</desc>
-  <defs>
-    <style>
-      .bg {{ fill: #0d1117; }} .edge {{ fill: none; stroke: #30363d; }}
-      text {{ {mono}; }}
-      .tag {{ font-size: 11px; fill: #6e7681; letter-spacing: 2px; }}
-      .amt {{ font-size: 40px; font-weight: 700; fill: #e6edf3; }}
-      .k {{ font-size: 10.5px; fill: #6e7681; }} .v {{ font-size: 15px; fill: #e6edf3; font-weight: 700; }}
-      .chip {{ font-size: 12px; fill: #0d1117; font-weight: 700; }}
-      .note {{ font-size: 12.5px; fill: #f0e6c8; font-style: italic; }}
-      .noteh {{ font-size: 10px; fill: #d29922; letter-spacing: 1px; }}
-      .big {{ font-size: 13px; fill: #e6edf3; font-weight: 700; }} .sm {{ font-size: 11px; fill: #8b949e; }}
-      .live {{ animation: blink 1.1s steps(2, start) infinite; }}
-      .grow {{ transform-box: fill-box; transform-origin: left; animation: grow 1.6s cubic-bezier(.2,.8,.2,1) both; }}
-      .scan {{ animation: scan 5s linear infinite; }}
-      .glow {{ animation: glow 2.6s ease-in-out infinite; }}
-      @keyframes blink {{ to {{ visibility: hidden; }} }}
-      @keyframes grow {{ from {{ transform: scaleX(0); }} }}
-      @keyframes scan {{ from {{ transform: translateY(-40px); }} to {{ transform: translateY(340px); }} }}
-      @keyframes glow {{ 0%,100% {{ stroke-opacity: .35; }} 50% {{ stroke-opacity: 1; }} }}
-    </style>
-    <linearGradient id="sl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#58a6ff" stop-opacity="0"/><stop offset="1" stop-color="#58a6ff" stop-opacity=".07"/></linearGradient>
-  </defs>
-  <rect class="bg" x="1" y="1" width="898" height="328" rx="12"/>
-  <rect class="scan" x="1" y="0" width="898" height="40" fill="url(#sl)"/>
-  <rect class="edge" x="1" y="1" width="898" height="328" rx="12"/>
+        last_line = "NO MOVES YET · THE FIRST VISITOR SETS THE SCOREBOARD"
+    blue = p["blued_hi"] if dark else p["blued"]
+    style = (".lume{animation:lume 2.4s ease-in-out infinite}@keyframes lume{0%,100%{opacity:.3}50%{opacity:1}}"
+             ".grow{transform-box:fill-box;transform-origin:left;animation:grow 1.6s cubic-bezier(.2,.8,.2,1) both}"
+             "@keyframes grow{from{transform:scaleX(0)}}")
+    defs = (f'<radialGradient id="{uid}v" cx=".3" cy=".5" r=".8"><stop offset="0" stop-color="{p["case_hi"]}"/>'
+            f'<stop offset="1" stop-color="{p["case"]}"/></radialGradient>')
+    t = kit.txt
+    body = (f'<rect width="{W}" height="{H}" rx="18" fill="url(#{uid}v)"/>'
+            + t(f"THE WAGER · CASE N° {c['n']:04d}", "martian", 9.5, 64, 66, p["salmon"], 0.32)
+            + f'<circle class="lume" cx="560" cy="62" r="3.6" fill="{p["lume"]}"/>'
+            + t("YOUR MOVE", "martian", 9, 574, 66, p["ink"], 0.32)
+            + f'<path d="M64,80H640" stroke="{p["steel_dim"]}" stroke-width=".7"/>'
+            + t("FAILED PAYMENT", "martian-light", 8.4, 64, 112, p["ink_dim"], 0.3)
+            + t(rupees(c["amount"]), "bodoni-text", 72, 60, 184, p["ink"])
+            + t(reason, "bodoni-display-italic", 26, 64, 222, p["salmon"] if dark else p["copper"]))
+    fields = [("PRIOR RETRIES", str(c["attempts"])), ("CUSTOMER FOR", f"{c['tenure']} months"),
+              ("PAST PAYMENTS OK", str(c["past_paid"])), ("CHANNEL", c["channel"])]
+    for i, (k, v) in enumerate(fields):
+        x = 64 + (i % 2) * 300
+        y = 262 + (i // 2) * 34
+        body += (t(k, "martian-light", 7.8, x, y, p["ink_faint"] if dark else p["ink_dim"], 0.26)
+                 + t(v, "bodoni-text", 17, x + 150, y + 1, p["ink"])
+                 + f'<path d="M{x},{y + 11}H{x + 270}" stroke="{p["steel_faint"]}" stroke-width=".6"/>')
+    body += (f'<rect x="64" y="{H - 82}" width="576" height="50" rx="10" fill="none" stroke="{p["lume"]}" '
+             f'stroke-opacity=".55"/>'
+             + t("NOTE ON FILE · THE MODEL CAN'T READ THIS", "martian-light", 7.6, 82, H - 61, p["lume"], 0.26)
+             + t(c["note"], "bodoni-text-italic", 16, 82, H - 42, p["ink"]))
+    # the scoreboard
+    x0 = 720
+    body += (t("HUMANS AGAINST THE MODEL · NET RECOVERED", "martian-light", 8.4, x0, 112, p["ink_dim"], 0.28)
+             + f'<path d="M{x0},124H{W - 64}" stroke="{p["steel_faint"]}" stroke-width=".6"/>')
+    for i, (who, v, col) in enumerate((("Humans", h, p["salmon"] if dark else p["copper"]), ("The model", m, blue))):
+        y = 170 + i * 70
+        bar = max(4.0, 416 * abs(v) / span)
+        body += (t(who, "bodoni-display", 26, x0, y, p["ink"])
+                 + t(signed(v), "martian", 12, W - 64, y - 4, p["ink"], 0.1, "end")
+                 + f'<rect x="{x0}" y="{y + 12}" width="416" height="6" rx="3" fill="{p["steel_faint"]}"/>'
+                 + f'<rect class="grow" x="{x0}" y="{y + 12}" width="{bar:.1f}" height="6" rx="3" '
+                   f'fill="{col if v >= 0 else p["ruby"]}"/>')
+    body += (t(f"ROUNDS · HUMANS WON {r['won']} · TIED {r['tied']} · LOST {r['lost']}", "martian-light", 8.4, x0,
+               H - 112, p["ink_dim"], 0.26)
+             + "".join(t(ln, "martian-light", 7.6, x0, H - 86 + 16 * i, p["ink_dim"], 0.2)
+                       for i, ln in enumerate(wrap(kit, last_line, 416)[:2]))
+             + t("PICK A PLAQUE BELOW", "martian", 8.4, x0, H - 40, p["ink"], 0.3)
+             + f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="18" fill="none" stroke="{p["steel_faint"]}"/>')
+    desc = (f"Case {c['n']}: a failed payment of {rupees(c['amount'])}, reason {reason}, {retries(c['attempts'])}, "
+            f"customer for {c['tenure']} months, {c['past_paid']} past payments succeeded, paid by {c['channel']}. "
+            f"Note on file, which the model cannot read: {c['note']}. Scoreboard: humans {signed(h)}, model {signed(m)}; "
+            f"rounds won {r['won']}, tied {r['tied']}, lost {r['lost']}.")
+    return kit.doc(W, H, f"The Wager, case {c['n']}", desc, style, defs, body, uid)
 
-  <text x="36" y="40" class="tag">CASE #{c['n']:04d} · FAILED PAYMENT</text>
-  <circle cx="545" cy="36" r="5" fill="#f85149" class="live"/>
-  <text x="557" y="40" class="tag" style="fill:#f85149">YOUR MOVE</text>
-  <text x="36" y="92" class="amt">{rupees(c['amount'])}</text>
-  <rect x="36" y="108" width="{len(reason) * 7.6 + 20:.0f}" height="24" rx="12" fill="#d29922"/>
-  <text x="46" y="124" class="chip">{esc(reason)}</text>
-  {rows}
 
-  <rect x="36" y="252" width="424" height="56" rx="8" fill="#1c1a12" stroke="#d29922" stroke-opacity=".5" class="glow"/>
-  <text x="50" y="272" class="noteh">NOTE ON FILE · THE MODEL CAN'T READ THIS</text>
-  <text x="50" y="294" class="note">{esc(c['note'])}</text>
+def wrap(kit, text: str, width: float) -> list[str]:
+    """Greedy word wrap by measured width in the engraved micro-type."""
+    lines, cur = [], ""
+    for word in text.split(" "):
+        trial = f"{cur} {word}".strip()
+        if cur and kit.width(trial, "martian-light", 7.6, 0.2) > width:
+            lines.append(cur)
+            cur = word
+        else:
+            cur = trial
+    return lines + [cur]
 
-  <line x1="490" y1="60" x2="490" y2="300" stroke="#21262d" stroke-width="2"/>
-  <text x="520" y="92" class="tag">HUMANS vs MODEL · NET RECOVERED</text>
-  <text x="520" y="128" class="big">humans</text>
-  <text x="864" y="128" class="big" text-anchor="end">{signed(h)}</text>
-  <rect x="520" y="138" width="344" height="12" rx="6" fill="#161b22"/>
-  <rect x="520" y="138" width="{bar(h):.1f}" height="12" rx="6" fill="{'#3fb950' if h >= 0 else '#f85149'}" class="grow"/>
-  <text x="520" y="182" class="big">model</text>
-  <text x="864" y="182" class="big" text-anchor="end">{signed(m)}</text>
-  <rect x="520" y="192" width="344" height="12" rx="6" fill="#161b22"/>
-  <rect x="520" y="192" width="{bar(m):.1f}" height="12" rx="6" fill="{'#58a6ff' if m >= 0 else '#f85149'}" class="grow"/>
-  <text x="520" y="236" class="sm">rounds · humans won {r['won']} · tied {r['tied']} · lost {r['lost']}</text>
-  <text x="520" y="262" class="sm">{esc(last_line[:58])}</text>
-  <text x="520" y="280" class="sm">{esc(last_line[58:116])}</text>
-  <text x="520" y="306" class="tag">PICK BELOW ↓</text>
-</svg>
-"""
+
+def render_plaque(action: str, p: dict) -> str:
+    """An engraved steel plaque for one move. Static apart from a slow glint."""
+    kit, _ = _themes()
+    W, H = 380, 110
+    dark = p["name"] == "dark"
+    uid = f"pq{action[0]}{p['name'][0]}"
+    words = {"recover": ("Recover", "RETRY THE PAYMENT"), "escalate": ("Escalate", "SEND IT TO A HUMAN"),
+             "leave": ("Leave it", "DO NOTHING, ON PURPOSE")}[action]
+    delay = {"recover": 0, "escalate": 1.2, "leave": 2.4}[action]
+    style = (f".gl{{animation:gl 7s ease-in-out {delay}s infinite}}"
+             "@keyframes gl{0%,70%{transform:translateX(-120px)}90%,100%{transform:translateX(520px)}}")
+    defs = (f'<linearGradient id="{uid}m" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{p["case_hi"]}"/>'
+            f'<stop offset="1" stop-color="{p["case"]}"/></linearGradient>'
+            f'<linearGradient id="{uid}g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/>'
+            f'<stop offset=".5" stop-color="#fff" stop-opacity="{".08" if dark else ".5"}"/>'
+            f'<stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
+            f'<clipPath id="{uid}c"><rect x="4" y="4" width="{W - 8}" height="{H - 8}" rx="14"/></clipPath>'
+            f'<radialGradient id="{uid}b" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="{p["blued_hi"]}"/>'
+            f'<stop offset="1" stop-color="{p["blued"]}"/></radialGradient>')
+    screws = "".join(f'<circle cx="{x}" cy="{y}" r="4.4" fill="url(#{uid}b)"/>'
+                     f'<path d="M{x - 3.4},{y - .8}h6.8v1.6h-6.8z" fill="{p["case"]}" opacity=".8" '
+                     f'transform="rotate({(x * 13 + y) % 90} {x} {y})"/>'
+                     for x, y in ((22, 22), (W - 22, 22), (22, H - 22), (W - 22, H - 22)))
+    body = (f'<rect x="4" y="7" width="{W - 8}" height="{H - 8}" rx="14" fill="#000" opacity="{".45" if dark else ".14"}"/>'
+            f'<rect x="4" y="4" width="{W - 8}" height="{H - 8}" rx="14" fill="url(#{uid}m)" stroke="{p["steel"]}" '
+            f'stroke-opacity=".7"/>'
+            f'<rect x="10" y="10" width="{W - 20}" height="{H - 20}" rx="10" fill="none" stroke="{p["steel_faint"]}"/>'
+            + screws
+            + kit.txt(words[0], "bodoni-display", 32, W / 2, 62, p["ink"], 0.01, "middle")
+            + kit.txt(words[1], "martian-light", 7.6, W / 2, 84, p["ink_dim"], 0.3, "middle")
+            + f'<g clip-path="url(#{uid}c)"><rect class="gl" x="0" y="0" width="90" height="{H}" fill="url(#{uid}g)" '
+              f'transform="skewX(-20)"/></g>')
+    return kit.doc(W, H, f"{words[0]}: {words[1].lower()}", f"Play this case: {words[0].lower()}.", style, defs, body, uid)
+
+
+def picture(src_dark: str, src_light: str, alt: str, width: str) -> str:
+    return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="{src_dark}"/>'
+            f'<img src="{src_light}" width="{width}" alt="{esc(alt)}"/></picture>')
 
 
 def render_block(s: dict) -> str:
     n = s["case"]
     c = case(n)
-    buttons = "".join(
-        f'<a href="{issue_url(a, n)}"><img src="assets/game/btn-{a}.svg" width="32%" alt="{LABEL[a]}"/></a>'
+    plaques = "".join(
+        f'<a href="{issue_url(a, n)}">'
+        + picture(f"{WAGER_URL}/plaque-{a}-dark.svg", f"{WAGER_URL}/plaque-{a}-light.svg", LABEL[a], "32%")
+        + "</a>"
         for a in ACTIONS)
     alt = (f"Case {n}: {rupees(c['amount'])} failed payment, {c['reason'].replace('_', ' ')}, "
            f"{retries(c['attempts'])}, customer for {c['tenure']} months, {c['past_paid']} past payments ok, "
            f"via {c['channel']}. Note: {c['note']}. Humans {signed(s['humans'])}, model {signed(s['model'])}.")
     lines = [START,
-             f'<img src="assets/game/case.svg?v={n}" width="100%" alt="{esc(alt)}"/>',
+             picture(f"{WAGER_URL}/case-dark.svg?v={n}", f"{WAGER_URL}/case-light.svg?v={n}", alt, "100%"),
              "",
-             f'<p align="center">{buttons}</p>',
+             f'<p align="center">{plaques}</p>',
              ""]
     if s["moves"]:
         lines += ["| case | player | their call | model's call | edge |", "|---|---|---|---|---|"]
         for mv in s["moves"]:
-            lines.append(f"| #{mv['case']} | @{mv['user']} | {LABEL[mv['action']]} | {LABEL[mv['model_action']]} "
+            lines.append(f"| N° {mv['case']} | @{mv['user']} | {LABEL[mv['action']]} | {LABEL[mv['model_action']]} "
                          f"| {signed(mv['human_ev'] - mv['model_ev'])} |")
         board = sorted(s["players"].items(), key=lambda kv: (-kv[1]["edge"], -kv[1]["moves"], kv[0]))[:10]
         lines += ["", "<details><summary><b>Leaderboard</b>: total edge over the model</summary>", "",
@@ -327,7 +380,7 @@ def render_block(s: dict) -> str:
             lines.append(f"| {i} | @{u} | {signed(p['edge'])} | {p['moves']} | {p['won']} |")
         lines += ["", "</details>"]
     else:
-        lines.append("_No moves yet. The first click sets the scoreboard._")
+        lines.append('<p align="center"><sub>No moves yet. The first visitor sets the scoreboard.</sub></p>')
     lines.append(END)
     return "\n".join(lines)
 
@@ -342,8 +395,12 @@ def write_readme(s: dict) -> None:
 
 
 def render_all(s: dict) -> None:
-    CARD.parent.mkdir(parents=True, exist_ok=True)
-    CARD.write_text(render_card(s), encoding="utf-8", newline="\n")
+    _, themes = _themes()
+    WAGER.mkdir(parents=True, exist_ok=True)
+    for p in themes:
+        (WAGER / f"case-{p['name']}.svg").write_text(render_card(s, p), encoding="utf-8", newline="\n")
+        for a in ACTIONS:
+            (WAGER / f"plaque-{a}-{p['name']}.svg").write_text(render_plaque(a, p), encoding="utf-8", newline="\n")
     write_readme(s)
 
 
@@ -367,6 +424,13 @@ def selftest() -> None:
     assert s2["humans"] - s2["model"] == s2["players"]["a"]["edge"]
     block = render_block(s2)
     assert block.startswith(START) and block.endswith(END) and "reclaim%7Crecover%7C2" in block
+    # the card and plaques render, as outlines only, in both finishes
+    import xml.dom.minidom
+    _, themes = _themes()
+    for p in themes:
+        for svg in [render_card(s2, p)] + [render_plaque(a, p) for a in ACTIONS]:
+            xml.dom.minidom.parseString(svg.encode())
+            assert "<text" not in svg and "<script" not in svg
     # a reader of the note should beat the model on average
     edge = 0.0
     for n in range(1, 2000):
